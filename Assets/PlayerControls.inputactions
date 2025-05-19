@@ -344,6 +344,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "269b9133-2477-4495-bd1a-402b3026c41c",
+            "actions": [
+                {
+                    "name": "X",
+                    "type": "Button",
+                    "id": "4eb1a48f-db7d-4e6e-93c2-f10a09d96dff",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Main Menu",
+                    "type": "Button",
+                    "id": "482c3c6a-be99-48c1-bd4c-fddbd232efb4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "921eb2a8-e0f3-4999-aa12-ff158dba6ec0",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "X",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6880306-3565-4429-bf1e-a307b69273d1",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Main Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

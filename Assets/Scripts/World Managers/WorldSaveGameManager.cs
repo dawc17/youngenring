@@ -117,6 +117,33 @@ namespace DKC
                 return;
             }
             
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotUsed(CharacterSlot.CharacterSlot_03);
+            if (!saveFileDataWriter.CheckIfFileExists())
+            {
+                currentSlot = CharacterSlot.CharacterSlot_03;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                return;
+            }
+            
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotUsed(CharacterSlot.CharacterSlot_04);
+            if (!saveFileDataWriter.CheckIfFileExists())
+            {
+                currentSlot = CharacterSlot.CharacterSlot_04;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                return;
+            }
+            
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotUsed(CharacterSlot.CharacterSlot_05);
+            if (!saveFileDataWriter.CheckIfFileExists())
+            {
+                currentSlot = CharacterSlot.CharacterSlot_05;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                return;
+            }
+            
             TitleScreenManager.Instance.DisplayNoFreeSlotPopup();
         }
 
@@ -149,6 +176,16 @@ namespace DKC
             // write that info onto a json file saved to this machine
             saveFileDataWriter.CreateNewCharacterSaveFile(currentCharacterData);
         }
+
+        public void DeleteGame(CharacterSlot characterSlot)
+        {
+            // chose a file to delete based on name
+            saveFileDataWriter = new WriteSaveData();
+            saveFileDataWriter.saveDataPath = Application.persistentDataPath;
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotUsed(characterSlot);
+ 
+            saveFileDataWriter.DeleteSaveFile();
+        }
         
         // load all character slots on device when starting game
         private void LoadAllCharacterSlots()
@@ -179,7 +216,7 @@ namespace DKC
         
         public IEnumerator LoadWorldScene()
         {
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
             
             player.LoadGameFromCurrentCharacterData(ref currentCharacterData);
             

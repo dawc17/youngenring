@@ -14,5 +14,6 @@ namespace DKC
         CharacterSlot_03,
         CharacterSlot_04,
         CharacterSlot_05,
+        NO_SLOT
     }
 }

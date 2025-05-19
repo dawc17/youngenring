@@ -1,5 +1,6 @@
 using Character.Player.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DKC
 {
@@ -72,6 +73,7 @@ namespace DKC
 
         public void SaveGameDateToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
+            currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
             currentCharacterData.characterName = playerNetworkManager.characterName.Value.ToString();
             currentCharacterData.xPos = transform.position.x;
             currentCharacterData.yPos = transform.position.y;

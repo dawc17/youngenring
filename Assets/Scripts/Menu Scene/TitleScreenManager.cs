@@ -16,11 +16,18 @@ namespace DKC
         [SerializeField] private Button loadMenuReturnButton;
         [SerializeField] private Button mainMenuLoadGameButton;
         [SerializeField] private Button mainMenuNewGameButton;
+        [SerializeField] private Button deleteCharacterPopupConfirmButton;
 
         [Header("Popups")] 
         [SerializeField] private GameObject noCharacterSlotsPopup;
-
         [SerializeField] private Button noChatacterSlotsButton;
+        [SerializeField] GameObject deleteCharacterSlotPopup;
+
+        [Header("Character Slots")] 
+        public CharacterSlot currentSelectedSlot = CharacterSlot.NO_SLOT;
+
+        [Header("Title Screen Inputs")] 
+        [SerializeField] private bool deleteCharacterSlot = false;
         
         public void Awake()
         {
@@ -51,6 +58,13 @@ namespace DKC
             // open load menu
             titleScreenLoadMenu.SetActive(true);
             
+            // Ensure delete character popup is hidden when opening the load menu
+            if (deleteCharacterSlotPopup != null)
+            {
+                deleteCharacterSlotPopup.SetActive(false);
+            }
+            
+            SelectNoSlot(); // Reset selected slot to prevent accidental delete popup
             loadMenuReturnButton.Select();
         }
 
@@ -61,7 +75,7 @@ namespace DKC
             // open main menu
             titleScreenMainMenu.SetActive(true);
             
-            loadMenuReturnButton.Select();
+            mainMenuLoadGameButton.Select();
         }
 
         public void DisplayNoFreeSlotPopup()
@@ -73,7 +87,45 @@ namespace DKC
         public void CloseNoFreeCharacterSlotsPopup()
         {
             noCharacterSlotsPopup.SetActive(false);
-            mainMenuNewGameButton.Select();
+            mainMenuLoadGameButton.Select();
+        }
+        
+        // character slots
+
+        public void SelectCharacterSlot(CharacterSlot characterSlot)
+        {
+            currentSelectedSlot = characterSlot;
+        }
+
+        public void SelectNoSlot()
+        {
+            currentSelectedSlot = CharacterSlot.NO_SLOT;
+        }
+
+        public void AttemptToDeleteCharacterSlot()
+        {
+            if (currentSelectedSlot != CharacterSlot.NO_SLOT)
+            {
+                deleteCharacterSlotPopup.SetActive(true);
+                deleteCharacterPopupConfirmButton.Select();
+            }
+        }
+
+        public void DeleteCharacterSlot()
+        {
+            deleteCharacterSlotPopup.SetActive(false);
+            WorldSaveGameManager.Instance.DeleteGame(currentSelectedSlot);
+            
+            // refresh the list when delete
+            titleScreenLoadMenu.SetActive(false);
+            titleScreenLoadMenu.SetActive(true);
+            loadMenuReturnButton.Select();
+        }
+
+        public void CloseDeleteCharacterPopup()
+        {
+            deleteCharacterSlotPopup.SetActive(false);
+            loadMenuReturnButton.Select();
         }
     }
 }

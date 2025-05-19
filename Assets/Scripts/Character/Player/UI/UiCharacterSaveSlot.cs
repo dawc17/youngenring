@@ -112,5 +112,10 @@ namespace DKC
             WorldSaveGameManager.Instance.currentSlot = characterSlot;
             WorldSaveGameManager.Instance.LoadGame();
         }
+
+        public void SelectCurrentSlot()
+        {
+            TitleScreenManager.Instance.SelectCharacterSlot(characterSlot);
+        }
     }
 }
