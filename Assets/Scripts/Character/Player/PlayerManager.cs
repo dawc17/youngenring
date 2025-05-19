@@ -54,6 +54,7 @@ namespace DKC
             {
                 PlayerCamera.instance.player = this;
                 PlayerInputManager.instance.player = this;
+                WorldSaveGameManager.Instance.player = this;
 
                 playerNetworkManager.currentStamina.OnValueChanged +=
                     PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue;
@@ -72,8 +73,8 @@ namespace DKC
         public void SaveGameDateToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
             currentCharacterData.characterName = playerNetworkManager.characterName.Value.ToString();
-            currentCharacterData.yPos = transform.position.x;
-            currentCharacterData.xPos = transform.position.y;
+            currentCharacterData.xPos = transform.position.x;
+            currentCharacterData.yPos = transform.position.y;
             currentCharacterData.zPos = transform.position.z;
         }
 
