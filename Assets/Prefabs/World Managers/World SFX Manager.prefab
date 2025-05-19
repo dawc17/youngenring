@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4066051047438603736
+--- !u!1 &3470447555458480825
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3822670770241220452}
-  - component: {fileID: 5498247008716955234}
+  - component: {fileID: 6678588692695608536}
+  - component: {fileID: 8743484700878440675}
   m_Layer: 0
-  m_Name: World Save Game Manager
+  m_Name: World SFX Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3822670770241220452
+--- !u!4 &6678588692695608536
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4066051047438603736}
+  m_GameObject: {fileID: 3470447555458480825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 114.79224, y: 0, z: -408.21988}
+  m_LocalPosition: {x: 49.86501, y: 0, z: 45.81817}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5498247008716955234
+--- !u!114 &8743484700878440675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4066051047438603736}
+  m_GameObject: {fileID: 3470447555458480825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c1880196cdefe397b89b66e8115b8, type: 3}
+  m_Script: {fileID: 11500000, guid: a0ae5eff8afdc294d87c42d295634981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldSceneIndex: 1
+  rollSFX: {fileID: 8300000, guid: fa4a4f2dd5c65e720a632a84e13ec8c4, type: 3}

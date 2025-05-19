@@ -6,6 +6,7 @@ namespace DKC
     {
         [HideInInspector] public PlayerAnimationManager playerAnimationManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
+        [HideInInspector] public PlayerNetworkManager playerNetworkManager;
         // ReSharper disable once RedundantOverriddenMember
         protected override void Awake()
         {
@@ -13,6 +14,7 @@ namespace DKC
             
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
             playerAnimationManager = GetComponent<PlayerAnimationManager>();
+            playerNetworkManager = GetComponent<PlayerNetworkManager>();
         }
 
         protected override void Update()

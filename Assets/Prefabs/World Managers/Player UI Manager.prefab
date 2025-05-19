@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936659097877769693}
-  - component: {fileID: 2736289328488791712}
+  - component: {fileID: 1500269556051835538}
   m_Layer: 0
   m_Name: Player UI Manager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2736289328488791712
+--- !u!114 &1500269556051835538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

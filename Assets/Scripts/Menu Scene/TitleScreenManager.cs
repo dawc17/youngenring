@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DKC
 {
-    public class TitleScrenManager : MonoBehaviour
+    public class TitleScreenManager : MonoBehaviour
     {
         public void StartNetworkAsHost()
         {

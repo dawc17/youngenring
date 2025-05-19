@@ -9,7 +9,7 @@ namespace DKC
         public Camera cameraObject;
         [SerializeField] Transform cameraPivotTransform;
 
-        public PlayerManager player;
+        [HideInInspector] public PlayerManager player;
 
         [Header("Camera Settings")] 
         private float cameraSmoothSpeed = 1;

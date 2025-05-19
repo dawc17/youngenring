@@ -26,6 +26,7 @@ namespace DKC
         [Header("Player Action Input")] 
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool gayInput = false;
+        [SerializeField] bool sprintInput = false;
         
         private void Awake()
         {
@@ -89,6 +90,10 @@ namespace DKC
                 playerControls.PlayerCamera.CameraControls.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Gay.performed += i => gayInput = true;
+                
+                // holding sprint input
+                playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+                playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
             }
 
             playerControls.Enable();
@@ -104,6 +109,7 @@ namespace DKC
             HandleCameraMovementInput();
             HandlePlayerMovementInput();
             HandleDodgeInput();
+            HandleSprintInput();
             //HandleGayInput();
         }
         
@@ -129,7 +135,7 @@ namespace DKC
             if (player == null)
                 return;
             
-            player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount);
+            player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
             
             // if we are locked on pass the horizontal as well
         }
@@ -162,6 +168,18 @@ namespace DKC
                 gayInput = false;
                 
                 player.playerLocomotionManager.AttemptToPerformGay();
+            }
+        }
+
+        private void HandleSprintInput()
+        {
+            if (sprintInput)
+            {
+                player.playerLocomotionManager.HandleSprinting();
+            }
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
             }
         }
     }

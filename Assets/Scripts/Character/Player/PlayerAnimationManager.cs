@@ -16,7 +16,7 @@ namespace DKC
 
         private void OnAnimatorMove()
         {
-            if (player.applyRootMotion)
+            if (player.IsOwner && player.applyRootMotion)
             {
                 Vector3 velocity = player.animator.deltaPosition;
                 player.characterController.Move(velocity);

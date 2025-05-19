@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6478189505320576642}
-  - component: {fileID: 3267094928814806087}
+  - component: {fileID: 7664041665878779550}
   m_Layer: 0
   m_Name: Player Input Manager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3267094928814806087
+--- !u!114 &7664041665878779550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ac677b80dd9c9adaba6bf668068eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   movement: {x: 0, y: 0}
   verticalInput: 0
   horizontalInput: 0
   moveAmount: 0
+  cameraInput: {x: 0, y: 0}
+  cameraVerticalInput: 0
+  cameraHorizontalInput: 0
+  dodgeInput: 0
+  gayInput: 0

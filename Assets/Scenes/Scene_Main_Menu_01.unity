@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 1227715697}
   - component: {fileID: 1227715696}
   - component: {fileID: 1227715695}
-  - component: {fileID: 1227715694}
+  - component: {fileID: 1227715699}
   m_Layer: 5
   m_Name: Title Screen Canvas
   m_TagString: Untagged
@@ -633,18 +633,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1227715694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227715693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82eb570d3f90d49669ac2cb24e51ab11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1227715695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,6 +716,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1227715699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227715693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82eb570d3f90d49669ac2cb24e51ab11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1413943809
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,8 +811,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1227715694}
-        m_TargetAssemblyTypeName: TitleScrenManager, Assembly-CSharp
+      - m_Target: {fileID: 1227715699}
+        m_TargetAssemblyTypeName: DKC.TitleScreenManager, Assembly-CSharp
         m_MethodName: StartNetworkAsHost
         m_Mode: 1
         m_Arguments:
@@ -1210,8 +1210,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1227715694}
-        m_TargetAssemblyTypeName: TitleScrenManager, Assembly-CSharp
+      - m_Target: {fileID: 1227715699}
+        m_TargetAssemblyTypeName: DKC.TitleScreenManager, Assembly-CSharp
         m_MethodName: StartNewGame
         m_Mode: 1
         m_Arguments:
@@ -1468,7 +1468,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player UI Manager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2736289328488791712, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1481,6 +1482,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9166111359984980468, guid: 13c43b861327d1415951d4697749b02c, type: 3}
+      propertyPath: collideWithLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4846027600887025410, guid: 13c43b861327d1415951d4697749b02c, type: 3}
       propertyPath: m_Name
       value: Player Camera LeftRight
@@ -1533,7 +1538,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6231671676788279393, guid: 13c43b861327d1415951d4697749b02c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1599,6 +1605,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86d5dc1c6698f946ebcbd263b0b529c6, type: 3}
+--- !u!1001 &7058517835477623766
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3470447555458480825, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_Name
+      value: World SFX Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49.86501
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 45.81817
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678588692695608536, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743484700878440675, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: rollSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: fa4a4f2dd5c65e720a632a84e13ec8c4, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 129335436ead25d2694a3a51450199cc, type: 3}
 --- !u!1001 &7563909312428682165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1651,7 +1718,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3267094928814806087, guid: dd8efeaf723f614eca8ff4007ff81f5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1723,6 +1791,7 @@ SceneRoots:
   - {fileID: 56968079}
   - {fileID: 6092863435819115664}
   - {fileID: 7934025035160611926}
+  - {fileID: 7058517835477623766}
   - {fileID: 7563909312428682165}
   - {fileID: 2402838944330690607}
   - {fileID: 5171021632933701963}
