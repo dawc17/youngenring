@@ -3022,6 +3022,7 @@ GameObject:
   - component: {fileID: 1275206811688982856}
   - component: {fileID: 1856490098546723959}
   - component: {fileID: 1753449179737717606}
+  - component: {fileID: 8757322484378549574}
   m_Layer: 0
   m_Name: PlayerKnight
   m_TagString: Untagged
@@ -3119,6 +3120,8 @@ MonoBehaviour:
   canMove: 1
   playerAnimationManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
+  playerNetworkManager: {fileID: 0}
+  playerStatsManager: {fileID: 0}
 --- !u!114 &5101922324819833685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3145,6 +3148,14 @@ MonoBehaviour:
     m_InternalValue: 0
   networkMoveAmount:
     m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+  endurance:
+    m_InternalValue: 1
+  currentStamina:
+    m_InternalValue: 0
+  maxStamina:
+    m_InternalValue: 0
 --- !u!114 &1349987405988659789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3162,7 +3173,9 @@ MonoBehaviour:
   moveAmount: 1
   walkingSpeed: 1.7
   runningSpeed: 4.3
+  sprintingSpeed: 7
   rotationSpeed: 15
+  sprintingStaminaCost: 2
 --- !u!114 &182460666487959517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3309,6 +3322,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8757322484378549574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889809006387741611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5211b372e37b49b7bbe209a90fc18613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9015845646992135718
 GameObject:
   m_ObjectHideFlags: 0

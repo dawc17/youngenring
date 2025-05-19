@@ -1,3 +1,4 @@
+using DKC;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Character.Player.UI
         [Header("Network Join")]
         [SerializeField] bool startGameAsClient;
 
+        [HideInInspector] public PlayerUIHudManager playerUIHudManager;
+        
         private void Awake()
         {
             // Check if an instance of this class already exists
@@ -20,6 +23,9 @@ namespace Character.Player.UI
             {
                 Destroy(gameObject);
             }
+            
+            playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
+
         }
 
         private void Start()

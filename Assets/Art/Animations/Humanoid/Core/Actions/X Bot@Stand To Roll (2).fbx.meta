@@ -55,7 +55,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.5451128
+      - time: 0.21995944
         functionName: PlayRollSFX
         data: 
         objectReferenceParameter: {instanceID: 0}
