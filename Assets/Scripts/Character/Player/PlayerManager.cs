@@ -68,5 +68,20 @@ namespace DKC
                
             }
         }
+
+        public void SaveGameDateToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
+        {
+            currentCharacterData.characterName = playerNetworkManager.characterName.Value.ToString();
+            currentCharacterData.yPos = transform.position.x;
+            currentCharacterData.xPos = transform.position.y;
+            currentCharacterData.zPos = transform.position.z;
+        }
+
+        public void LoadGameFromCurrentCharacterData(ref CharacterSaveData currentCharacterData)
+        {
+            playerNetworkManager.characterName.Value = currentCharacterData.characterName;
+            Vector3 myPos = new Vector3(currentCharacterData.xPos, currentCharacterData.yPos, currentCharacterData.zPos);
+            transform.position = myPos;
+        }
     }
 }

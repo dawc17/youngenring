@@ -8,12 +8,27 @@ namespace DKC
 
         public void SetNewStaminaValue(float oldValue, float newValue)
         {
-            staminaBar.SetStat(Mathf.RoundToInt(newValue));
+            if (staminaBar != null)
+            {
+                staminaBar.SetStat(Mathf.RoundToInt(newValue));
+            }
+            else
+            {
+                Debug.LogError("StaminaBar is not assigned in PlayerUIHudManager.", this);
+            }
         }
 
         public void SetMaxStaminaValue(int maxStamina)
         {
-            staminaBar.SetMaxStat(maxStamina);
+            if (staminaBar != null)
+            {
+                staminaBar.SetMaxStat(maxStamina);
+            }
+            else
+            {
+                Debug.LogError("StaminaBar is not assigned in PlayerUIHudManager.", this);
+            }
         }
     }
 }
+
