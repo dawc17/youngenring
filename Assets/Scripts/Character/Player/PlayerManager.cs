@@ -57,17 +57,17 @@ namespace DKC
                 PlayerInputManager.instance.player = this;
                 WorldSaveGameManager.Instance.player = this;
 
+                // update the total amout of stat when the stat linked changed
+                playerNetworkManager.vitality.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;
+                playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxStaminaValue;
+                
+                // updates stat bars when health or stamina changes
+                playerNetworkManager.currentHealth.OnValueChanged +=
+                    PlayerUIManager.instance.playerUIHudManager.SetNewHealthValue;
+                
                 playerNetworkManager.currentStamina.OnValueChanged +=
                     PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
-                
-                // this will be moved when saving and loading is added
-                playerNetworkManager.maxStamina.Value =
-                    playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
-                playerNetworkManager.currentStamina.Value =
-                    playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
-                PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
-               
             }
         }
 
@@ -78,6 +78,12 @@ namespace DKC
             currentCharacterData.xPos = transform.position.x;
             currentCharacterData.yPos = transform.position.y;
             currentCharacterData.zPos = transform.position.z;
+
+            currentCharacterData.currentHealth = playerNetworkManager.currentHealth.Value;
+            currentCharacterData.currentStamina = playerNetworkManager.currentStamina.Value;
+            
+            currentCharacterData.vitality = playerNetworkManager.vitality.Value;
+            currentCharacterData.endurance = playerNetworkManager.endurance.Value;
         }
 
         public void LoadGameFromCurrentCharacterData(ref CharacterSaveData currentCharacterData)
@@ -85,6 +91,20 @@ namespace DKC
             playerNetworkManager.characterName.Value = currentCharacterData.characterName;
             Vector3 myPos = new Vector3(currentCharacterData.xPos, currentCharacterData.yPos, currentCharacterData.zPos);
             transform.position = myPos;
+            
+            playerNetworkManager.vitality.Value = currentCharacterData.vitality;
+            playerNetworkManager.endurance.Value = currentCharacterData.endurance;
+            
+            playerNetworkManager.maxHealth.Value =
+                playerStatsManager.CalculateHealthBasedOnVitalityLevel(playerNetworkManager.vitality.Value);
+            playerNetworkManager.maxStamina.Value =
+                playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
+            
+            playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
+            playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
+            
+            PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+            PlayerUIManager.instance.playerUIHudManager.SetMaxHealthValue(playerNetworkManager.maxHealth.Value);
         }
     }
 }

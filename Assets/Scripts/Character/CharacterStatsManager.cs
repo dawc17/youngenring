@@ -19,12 +19,24 @@ namespace DKC
             character = GetComponent<CharacterManager>();
         }
 
+        protected virtual void Start()
+        {
+        }
+
         public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
         {
             float stamina = 0;
 
             stamina = endurance * 10;
             return Mathf.RoundToInt(stamina);
+        }
+        
+        public int CalculateHealthBasedOnVitalityLevel(int vitality)
+        {
+            float health = 0;
+
+            health = vitality * 15;
+            return Mathf.RoundToInt(health);
         }
         
         public virtual void RegenerateStamina()

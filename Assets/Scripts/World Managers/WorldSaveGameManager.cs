@@ -104,7 +104,7 @@ namespace DKC
             {
                 currentSlot = CharacterSlot.CharacterSlot_01;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                OnNewGame();
                 return;
             }
             
@@ -113,7 +113,7 @@ namespace DKC
             {
                 currentSlot = CharacterSlot.CharacterSlot_02;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                OnNewGame();
                 return;
             }
             
@@ -122,7 +122,7 @@ namespace DKC
             {
                 currentSlot = CharacterSlot.CharacterSlot_03;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                OnNewGame();
                 return;
             }
             
@@ -131,7 +131,7 @@ namespace DKC
             {
                 currentSlot = CharacterSlot.CharacterSlot_04;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                OnNewGame();
                 return;
             }
             
@@ -140,11 +140,18 @@ namespace DKC
             {
                 currentSlot = CharacterSlot.CharacterSlot_05;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                OnNewGame();
                 return;
             }
             
             TitleScreenManager.Instance.DisplayNoFreeSlotPopup();
+        }
+
+        private void OnNewGame()
+        {
+            // saves newly created stats and items when creation screen is added
+            SaveGame();
+            StartCoroutine(LoadWorldScene());
         }
 
         public void LoadGame()
@@ -216,7 +223,7 @@ namespace DKC
         
         public IEnumerator LoadWorldScene()
         {
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
             
             player.LoadGameFromCurrentCharacterData(ref currentCharacterData);
             
