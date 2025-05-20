@@ -1,16 +1,28 @@
 using UnityEngine;
 
-public class CharacterEffectsManager : MonoBehaviour
+namespace DKC
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class CharacterEffectsManager : MonoBehaviour
     {
-        
-    }
+        // process instant effects (healing, damage etc.)
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // process continuous effects (poison, rot etc.)
+
+        // process static effects (armor buffs, trinkets etc.)
+
+        CharacterManager character;
+
+        protected virtual void Awake()
+        {
+            character = GetComponent<CharacterManager>();
+        }
+
+        public virtual void ProcessInstantEffect(InstantCharacterEffect effect)
+        {
+            // take in an effect
+            // process it
+
+            effect.ProcessEffect(character);
+        }
     }
 }

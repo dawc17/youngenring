@@ -3054,6 +3054,7 @@ GameObject:
   - component: {fileID: 1856490098546723959}
   - component: {fileID: 1753449179737717606}
   - component: {fileID: 8757322484378549574}
+  - component: {fileID: -3804724862589623899}
   m_Layer: 3
   m_Name: PlayerKnight
   m_TagString: Untagged
@@ -3453,6 +3454,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaRegenerationDelay: 2
   staminaRegenerationAmount: 2
+--- !u!114 &-3804724862589623899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889809006387741611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4517730348019474a81616a06a67c7f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectToTest: {fileID: 11400000, guid: ffe83ff4771fd7744abfa80d9b6fdbc4, type: 2}
+  processEffect: 0
 --- !u!1 &9015845646992135718
 GameObject:
   m_ObjectHideFlags: 0
