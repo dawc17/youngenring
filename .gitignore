@@ -77,3 +77,6 @@ crashlytics-build.properties
 # ignore syntystudios
 /[Aa]ssets/SyntyStudios/
 /[Aa]ssets/SyntyStudios.meta
+
+/[Aa]ssets/Feel
+/[Aa]ssets/Feel.meta
