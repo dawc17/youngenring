@@ -27,7 +27,7 @@ namespace DKC
         public CharacterSlot currentSelectedSlot = CharacterSlot.NO_SLOT;
 
         [Header("Title Screen Inputs")] 
-        [SerializeField] private bool deleteCharacterSlot = false;
+        [SerializeField] private bool deleteCharacterSlot;
         
         public void Awake()
         {

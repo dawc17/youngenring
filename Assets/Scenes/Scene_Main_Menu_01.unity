@@ -1070,6 +1070,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!225 &433161204 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 3803807089053189430, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
+  m_PrefabInstance: {fileID: 2402838944330690607}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &468269842
 GameObject:
   m_ObjectHideFlags: 0
@@ -4361,6 +4366,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 935769528267788290, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
+      propertyPath: youDiedPopUpCanvasGroup
+      value: 
+      objectReference: {fileID: 433161204}
     - target: {fileID: 4509825749403223148, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

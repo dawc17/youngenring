@@ -83,7 +83,7 @@ namespace DKC
                     // deserialize the data from json back to unity
                     characterSaveData = JsonUtility.FromJson<CharacterSaveData>(dataToLoad);
                 }
-                catch (Exception ex)
+                catch
                 {
                     
                 }

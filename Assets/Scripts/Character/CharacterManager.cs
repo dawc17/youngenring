@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Unity.Netcode;
 
@@ -14,6 +15,7 @@ namespace DKC
         [HideInInspector] public Animator animator;
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
         [HideInInspector] public CharacterEffectsManager characterEffectsManager;
+        [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
         
         [Header("Flags")] 
         public bool isPerformingAction = false;
@@ -33,6 +35,7 @@ namespace DKC
             animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
+            characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
         }
 
         public override void OnNetworkSpawn()
@@ -78,6 +81,34 @@ namespace DKC
             
         }
 
-        
+        public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+        {
+            if (IsOwner)
+            {
+                characterNetworkManager.currentHealth.Value = 0;
+                isDead.Value = true;
+                
+                // reset any flags here that need to be reset
+                
+                // if we are not grounded, play an aerial death animation
+
+                if (!manuallySelectDeathAnimation)
+                {
+                    characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
+                }
+            }
+            // play death sfx
+
+            yield return new WaitForSeconds(5);
+            
+            // award players with runes
+            
+            // disable character
+        }
+
+        public virtual void ReviveCharacter()
+        {
+            
+        }
     }
 }

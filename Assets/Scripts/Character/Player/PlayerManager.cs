@@ -1,3 +1,4 @@
+using System.Collections;
 using Character.Player.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,10 +7,14 @@ namespace DKC
 {
     public class PlayerManager : CharacterManager
     {
+        [Header("Debug Menu")]
+        [SerializeField] private bool respawnCharacter = false;
+        
         [HideInInspector] public PlayerAnimationManager playerAnimationManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         [HideInInspector] public PlayerNetworkManager playerNetworkManager;
         [HideInInspector] public PlayerStatsManager playerStatsManager;
+        [HideInInspector] private CharacterManager characterManager;
 
         // ReSharper disable once RedundantOverriddenMember
         protected override void Awake()
@@ -34,6 +39,8 @@ namespace DKC
             
             // regen stamina
             playerStatsManager.RegenerateStamina();
+
+            DebugMenu();
         }
 
         protected override void LateUpdate()
@@ -68,6 +75,35 @@ namespace DKC
                 playerNetworkManager.currentStamina.OnValueChanged +=
                     PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
+            }
+
+            playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
+        }
+
+        public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+        {
+            if (IsOwner)
+            {
+                PlayerUIManager.instance.playerUIPopupManager.SendYouDiedPopUp();
+            }
+            
+            return base.ProcessDeathEvent(manuallySelectDeathAnimation);
+            // check for players that are alive , if 0 respawn all players
+        }
+
+        public override void ReviveCharacter()
+        {
+            base.ReviveCharacter();
+
+            if (IsOwner)
+            {
+                playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
+                playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
+                isDead.Value = false;
+                // restore mana
+                
+                // play rebirtth effevts
+                playerAnimationManager.PlayTargetActionAnimation("New State", false);
             }
         }
 
@@ -105,6 +141,15 @@ namespace DKC
             
             PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
             PlayerUIManager.instance.playerUIHudManager.SetMaxHealthValue(playerNetworkManager.maxHealth.Value);
+        }
+
+        private void DebugMenu()
+        {
+            if (respawnCharacter)
+            {
+                respawnCharacter = false;
+                ReviveCharacter();
+            }
         }
     }
 }

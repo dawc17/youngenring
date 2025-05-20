@@ -23,7 +23,7 @@ namespace DKC
         public float zPos;
 
         [Header("Resources")] 
-        public float currentHealth;
+        public int currentHealth;
         public float currentStamina;
         
         [Header("Stats")] 

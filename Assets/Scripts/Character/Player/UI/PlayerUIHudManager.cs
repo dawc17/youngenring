@@ -16,11 +16,11 @@ namespace DKC
             staminaBar.gameObject.SetActive(true);
         }
         
-        public void SetNewHealthValue(float oldValue, float newValue)
+        public void SetNewHealthValue(int oldValue, int newValue)
         {
             if (healthBar != null)
             {
-                healthBar.SetStat(Mathf.RoundToInt(newValue));
+                healthBar.SetStat(newValue);
             }
             else
             {

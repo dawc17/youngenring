@@ -25,7 +25,6 @@ namespace DKC
 
         [Header("Player Action Input")] 
         [SerializeField] bool dodgeInput = false;
-        [SerializeField] bool gayInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
 
@@ -91,7 +90,6 @@ namespace DKC
                 playerControls.PlayerMovement.Movement.performed += i => movement = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.CameraControls.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
-                playerControls.PlayerActions.Gay.performed += i => gayInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
 
                 playerControls.UI.LockCursor.performed += i =>

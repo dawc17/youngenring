@@ -11,6 +11,7 @@ namespace Character.Player.UI
         [SerializeField] bool startGameAsClient;
 
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
+        [HideInInspector] public PlayerUIPopupManager playerUIPopupManager;
         
         private void Awake()
         {
@@ -25,6 +26,7 @@ namespace Character.Player.UI
             }
             
             playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
+            playerUIPopupManager = GetComponentInChildren<PlayerUIPopupManager>();
 
         }
 
