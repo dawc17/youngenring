@@ -28,8 +28,6 @@ namespace DKC
         [SerializeField] bool gayInput = false;
         [SerializeField] bool sprintInput = false;
 
-        [Header("Menu Input")] 
-        [SerializeField] private bool mainMenuInput = false;
         
         private void Awake()
         {
@@ -105,21 +103,6 @@ namespace DKC
         private void Update()
         {
             HandleAllInputs();
-            if (mainMenuInput)
-            {
-                mainMenuInput = false;
-                
-                if (WorldSaveGameManager.Instance != null)
-                {
-                    WorldSaveGameManager.Instance.SaveGame();
-                }
-                else
-                {
-                    Debug.LogWarning("PlayerInputManager: WorldSaveGameManager.Instance is null. Game will not be saved.");
-                }
-                
-                SceneManager.LoadScene(0); // Load the scene with build index 0
-            }
         }
 
         private void HandleAllInputs()
@@ -128,7 +111,6 @@ namespace DKC
             HandlePlayerMovementInput();
             HandleDodgeInput();
             HandleSprintInput();
-            HandleMainMenuInput();
             //HandleGayInput();
         }
         
@@ -200,11 +182,6 @@ namespace DKC
             {
                 player.playerNetworkManager.isSprinting.Value = false;
             }
-        }
-
-        private void HandleMainMenuInput()
-        {
-            playerControls.UI.MainMenu.performed += i => mainMenuInput = true;
         }
     }
 
