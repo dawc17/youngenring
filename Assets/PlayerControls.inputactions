@@ -311,7 +311,7 @@
                 {
                     "name": "",
                     "id": "4bf5dd8f-4574-4f0d-b575-17291090dec3",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -397,6 +397,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Lock Cursor",
+                    "type": "Button",
+                    "id": "4e4ab270-85d7-45ae-aee4-63bd835c6863",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -413,12 +422,34 @@
                 },
                 {
                     "name": "",
+                    "id": "af542ad1-7c31-47d7-a1d0-0d78ed56ead9",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "X",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a6880306-3565-4429-bf1e-a307b69273d1",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Main Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc13c59b-55f9-40c3-99b5-b4c3995d62f3",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lock Cursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

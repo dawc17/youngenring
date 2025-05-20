@@ -19,12 +19,19 @@ namespace DKC
         [SerializeField] float rotationSpeed = 15;
         [SerializeField] int sprintingStaminaCost = 2;
 
+        [Header("Jump")]
+        [SerializeField] private float jumpStaminaCost = 10;
+        [SerializeField] float jumpHeight = 2.5f;
+        [SerializeField] float jumpForwardSpeed = 5;
+        [SerializeField] float freeFallSpeed = 2;
+        private Vector3 jumpDirection;
+
+
         [Header("Dodge")]
         private Vector3 rollDirection;
 
         [SerializeField] private float dodgeStaminaCost = 25;
         [SerializeField] private float backstepStaminaCost = 10;
-        [SerializeField] private float jumpStaminaCost = 10;
         
         protected override void Awake()
         {
@@ -62,6 +69,8 @@ namespace DKC
         {
             HandleGroundedMovement();
             HandleRotation();
+            HandleJumpingMovement();
+            HandleFreeFallMovement();
         }
 
         private void GetMovementValues()
@@ -100,6 +109,28 @@ namespace DKC
                 {
                     player.characterController.Move(moveDirection * (walkingSpeed * Time.deltaTime));
                 }
+            }
+        }
+
+        private void HandleJumpingMovement()
+        {
+            if (player.isJumping)
+            {
+                player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
+            }
+        }
+
+        private void HandleFreeFallMovement()
+        {
+            if (!player.isGrounded)
+            {
+                Vector3 freeFallDirection;
+
+                freeFallDirection = PlayerCamera.instance.transform.forward * PlayerInputManager.instance.verticalInput;
+                freeFallDirection = freeFallDirection + PlayerCamera.instance.transform.right * PlayerInputManager.instance.horizontalInput;
+                freeFallDirection.y = 0;
+
+                player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
             }
         }
 
@@ -199,7 +230,7 @@ namespace DKC
                 return;
 
             // if we are in the air, return!!!
-            if (player.isGrounded)
+            if (!player.isGrounded)
                 return;
 
             // lose stamina
@@ -207,19 +238,41 @@ namespace DKC
             player.isJumping = true;
 
             player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
+
+            jumpDirection = PlayerCamera.instance.cameraObject.transform.forward *
+                                 PlayerInputManager.instance.verticalInput;
+            jumpDirection += PlayerCamera.instance.cameraObject.transform.right *
+                                 PlayerInputManager.instance.horizontalInput;
+
+            jumpDirection.y = 0;
+            jumpDirection.Normalize();
+
+            if (jumpDirection != Vector3.zero)
+            {
+
+                // if sprinting, thunderfuck at full speed
+                if (player.playerNetworkManager.isSprinting.Value)
+                {
+                    jumpDirection *= 1;
+                }
+                // if running, dont thunderfuck as far
+                else if (PlayerInputManager.instance.moveAmount > 0.5f)
+                {
+                    jumpDirection *= 0.5f;
+                }
+                // if walking dont thunderfuck at all
+                else if (PlayerInputManager.instance.moveAmount <= 0.5f)
+                {
+                    jumpDirection *= 0.25f;
+                }
+            }
         }
 
         public void ApplyJumpingVelocity()
         {
-            // apply upward velocity
+            yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
         }
 
-        public void AttemptToPerformGay()
-        {
-            if (player.isPerformingAction)
-                return;
-            player.playerAnimationManager.PlayGayAnimation();
-        }
     }
 }
 

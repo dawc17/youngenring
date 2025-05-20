@@ -93,7 +93,15 @@ namespace DKC
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Gay.performed += i => gayInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
-                
+
+                playerControls.UI.LockCursor.performed += i =>
+                {
+                    if (player == null)
+                        return;
+
+                    Cursor.lockState = CursorLockMode.Locked;
+                };
+
                 // holding sprint input
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
                 playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
@@ -113,6 +121,7 @@ namespace DKC
             HandlePlayerMovementInput();
             HandleDodgeInput();
             HandleSprintInput();
+            HandleJumpInput();
             //HandleGayInput();
         }
         
@@ -161,16 +170,6 @@ namespace DKC
                 // perform a dodge
                 
                 player.playerLocomotionManager.AttemptToPerformDodge();
-            }
-        }
-
-        private void HandleGayInput()
-        {
-            if (gayInput)
-            {
-                gayInput = false;
-                
-                player.playerLocomotionManager.AttemptToPerformGay();
             }
         }
 

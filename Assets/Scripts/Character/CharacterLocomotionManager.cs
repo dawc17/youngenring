@@ -8,7 +8,7 @@ namespace DKC
         CharacterManager character;
 
         [Header("Ground Check and Jumping")]
-        [SerializeField] float gravityForce = -9.81f; // the force at which our character is pulled down (gravity!!)
+        [SerializeField] protected float gravityForce = -9.81f; // the force at which our character is pulled down (gravity!!)
         [SerializeField] LayerMask groundLayer;
         [SerializeField] float groundCheckSphereRadius = 0.3f;
         [SerializeField] protected Vector3 yVelocity; 

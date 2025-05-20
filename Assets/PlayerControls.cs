@@ -397,7 +397,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4bf5dd8f-4574-4f0d-b575-17291090dec3"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -483,6 +483,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lock Cursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e4ab270-85d7-45ae-aee4-63bd835c6863"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -499,12 +508,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""af542ad1-7c31-47d7-a1d0-0d78ed56ead9"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""X"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a6880306-3565-4429-bf1e-a307b69273d1"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Main Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc13c59b-55f9-40c3-99b5-b4c3995d62f3"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -529,6 +560,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_X = m_UI.FindAction("X", throwIfNotFound: true);
         m_UI_MainMenu = m_UI.FindAction("Main Menu", throwIfNotFound: true);
+        m_UI_LockCursor = m_UI.FindAction("Lock Cursor", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -935,6 +967,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_X;
     private readonly InputAction m_UI_MainMenu;
+    private readonly InputAction m_UI_LockCursor;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -954,6 +987,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/MainMenu".
         /// </summary>
         public InputAction @MainMenu => m_Wrapper.m_UI_MainMenu;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/LockCursor".
+        /// </summary>
+        public InputAction @LockCursor => m_Wrapper.m_UI_LockCursor;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -986,6 +1023,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MainMenu.started += instance.OnMainMenu;
             @MainMenu.performed += instance.OnMainMenu;
             @MainMenu.canceled += instance.OnMainMenu;
+            @LockCursor.started += instance.OnLockCursor;
+            @LockCursor.performed += instance.OnLockCursor;
+            @LockCursor.canceled += instance.OnLockCursor;
         }
 
         /// <summary>
@@ -1003,6 +1043,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MainMenu.started -= instance.OnMainMenu;
             @MainMenu.performed -= instance.OnMainMenu;
             @MainMenu.canceled -= instance.OnMainMenu;
+            @LockCursor.started -= instance.OnLockCursor;
+            @LockCursor.performed -= instance.OnLockCursor;
+            @LockCursor.canceled -= instance.OnLockCursor;
         }
 
         /// <summary>
@@ -1123,5 +1166,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMainMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Lock Cursor" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLockCursor(InputAction.CallbackContext context);
     }
 }
