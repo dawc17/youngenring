@@ -27,6 +27,7 @@ namespace DKC
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool gayInput = false;
         [SerializeField] bool sprintInput = false;
+        [SerializeField] bool jumpInput = false;
 
         
         private void Awake()
@@ -91,6 +92,7 @@ namespace DKC
                 playerControls.PlayerCamera.CameraControls.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Gay.performed += i => gayInput = true;
+                playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 
                 // holding sprint input
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -181,6 +183,19 @@ namespace DKC
             else
             {
                 player.playerNetworkManager.isSprinting.Value = false;
+            }
+        }
+
+        private void HandleJumpInput()
+        {
+            if (jumpInput)
+            {
+                jumpInput = false;
+
+                // if window ui open, return
+
+                // attempt to perform a jump
+                player.playerLocomotionManager.AttemptToPerformJump();
             }
         }
     }

@@ -12,6 +12,8 @@ namespace DKC
 
         [Header("Flags")] 
         public bool isPerformingAction = false;
+        public bool isJumping = false;
+        public bool isGrounded = true;
         public bool applyRootMotion = false;
         public bool canRotate = true;
         public bool canMove = true;
@@ -41,6 +43,7 @@ namespace DKC
 
         protected virtual void Update()
         {
+            animator.SetBool("isGrounded", isGrounded);
             // if character owned by us, assign position to our transform
             if (IsOwner)
             {

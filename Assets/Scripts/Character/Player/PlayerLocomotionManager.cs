@@ -24,6 +24,7 @@ namespace DKC
 
         [SerializeField] private float dodgeStaminaCost = 25;
         [SerializeField] private float backstepStaminaCost = 10;
+        [SerializeField] private float jumpStaminaCost = 10;
         
         protected override void Awake()
         {
@@ -181,6 +182,36 @@ namespace DKC
                 player.playerAnimationManager.PlayBackstepAnimation();
                 player.playerNetworkManager.currentStamina.Value -= backstepStaminaCost;
             }
+        }
+
+        public void AttemptToPerformJump()
+        {
+            // if performing action do not allow jump (will change when combat is added)
+            if (player.isPerformingAction)
+                return;
+
+            // if we are out of stamina, return
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+                return;
+
+            // if we are already jumping, return
+            if (player.isJumping)
+                return;
+
+            // if we are in the air, return!!!
+            if (player.isGrounded)
+                return;
+
+            // lose stamina
+            player.playerAnimationManager.PlayTargetActionAnimation("Main_Jump_01", false);
+            player.isJumping = true;
+
+            player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
+        }
+
+        public void ApplyJumpingVelocity()
+        {
+            // apply upward velocity
         }
 
         public void AttemptToPerformGay()
