@@ -6,10 +6,15 @@ namespace DKC
 {
     public class CharacterManager : NetworkBehaviour
     {
+        [Header("Status")] 
+        public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false,
+            NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        
         [HideInInspector] public CharacterController characterController;
         [HideInInspector] public Animator animator;
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
-
+        [HideInInspector] public CharacterEffectsManager characterEffectsManager;
+        
         [Header("Flags")] 
         public bool isPerformingAction = false;
         public bool isJumping = false;
@@ -27,6 +32,7 @@ namespace DKC
             characterController = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
+            characterEffectsManager = GetComponent<CharacterEffectsManager>();
         }
 
         public override void OnNetworkSpawn()

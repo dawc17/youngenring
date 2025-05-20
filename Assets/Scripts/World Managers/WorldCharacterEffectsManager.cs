@@ -8,6 +8,9 @@ namespace DKC
     {
         public static WorldCharacterEffectsManager Instance;
 
+        [Header("Damage")] 
+        public TakeDamageEffect takeDamageEffect;
+
         [SerializeField] List<InstantCharacterEffect> instantEffects;
 
         private void Awake()
@@ -20,9 +23,11 @@ namespace DKC
             {
                 Destroy(gameObject);
             }
+            
+            GenerateEffectIDs();
         }
 
-        private void OnCanvasGroupChanged()
+        private void GenerateEffectIDs()
         {
             for (int i = 0; i < instantEffects.Count; i++)
             {
