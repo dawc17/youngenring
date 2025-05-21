@@ -11,7 +11,7 @@ namespace DKC
         [SerializeField] protected float gravityForce = -9.81f; // the force at which our character is pulled down (gravity!!)
         [SerializeField] LayerMask groundLayer;
         [SerializeField] float groundCheckSphereRadius = 0.3f;
-        [SerializeField] protected Vector3 yVelocity; 
+        [SerializeField] protected Vector3 yVelocity;
         [SerializeField] protected float groundedYVelocity = -2;
         [SerializeField] protected float fallStartYVelocity = -5; // the force at which the character begins to all (gets bigger the longer you fall)
         protected bool fallingVelocityHasBeenSet = false;
@@ -56,9 +56,9 @@ namespace DKC
             character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
         }
 
-        protected void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
-        }
+        //protected void OnDrawGizmosSelected()
+        //{
+        //    Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        //}
     }
 }
