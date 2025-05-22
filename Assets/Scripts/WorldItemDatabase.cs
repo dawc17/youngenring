@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DKC
 {
@@ -37,6 +38,11 @@ namespace DKC
             {
                 items[i].itemID = i;
             }
+        }
+
+        public WeaponItem GetWeaponByID(int ID)
+        {
+            return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
         }
     }
 }

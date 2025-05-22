@@ -84,6 +84,45 @@ namespace DKC
                 {
                     selectedWeapon = player.playerInventoryManager.weaponsInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex];
                     // assign network weapon id so it syncs for everyone
+                    player.playerNetworkManager.currentRightHandWeaponID.Value = player.playerInventoryManager.weaponsInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex].itemID;
+                }
+            }
+
+            if (selectedWeapon == null && player.playerInventoryManager.rightHandWeaponIndex < 2)
+            {
+                SwitchRightWeapon();
+            }
+            else
+            {
+                // we check if we are holding more than one weapon
+                float weaponCount = 0;
+                WeaponItem firstWeapon = null;
+                int firstWeaponPosition = 0;
+
+                for (int i = 0; i < player.playerInventoryManager.weaponsInRightHandSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.weaponsInRightHandSlots[i].itemID != WorldItemDatabase.Instance.unarmedWeapon.itemID)
+                    {
+                        weaponCount += 1;
+                        
+                        if (firstWeapon == null)
+                        {
+                            firstWeapon = player.playerInventoryManager.weaponsInRightHandSlots[i];
+                            firstWeaponPosition = i;
+                        }
+                    }
+                }
+
+                if (weaponCount <= 1)
+                {
+                    player.playerInventoryManager.rightHandWeaponIndex = -1;
+                    selectedWeapon = Instantiate(WorldItemDatabase.Instance.unarmedWeapon);
+                    player.playerNetworkManager.currentRightHandWeaponID.Value = selectedWeapon.itemID;
+                }
+                else
+                {
+                    player.playerInventoryManager.rightHandWeaponIndex = firstWeaponPosition;
+                    player.playerNetworkManager.currentRightHandWeaponID.Value = firstWeapon.itemID;
                 }
             }
         }
