@@ -148,7 +148,7 @@ namespace DKC
                 else
                 {
                     Debug.LogError("WeaponManager component not found on the weapon model: " +
-                                  player.playerInventoryManager.currentRightHandWeapon.name);
+                    player.playerInventoryManager.currentRightHandWeapon.name);
                 }
             }
         }
@@ -231,6 +231,8 @@ namespace DKC
         {
             if (player.playerInventoryManager.currentLeftHandWeapon != null)
             {
+                leftHandSlot.UnloadWeapon();
+
                 leftHandWeaponModel = Instantiate(player.playerInventoryManager.currentLeftHandWeapon.weaponModel);
                 leftHandSlot.LoadWeapon(leftHandWeaponModel);
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
@@ -241,7 +243,7 @@ namespace DKC
                 else
                 {
                     Debug.LogError("WeaponManager component not found on the weapon model: " +
-                                  player.playerInventoryManager.currentLeftHandWeapon.name);
+                    player.playerInventoryManager.currentLeftHandWeapon.name);
                 }
             }
         }
