@@ -4,7 +4,7 @@ namespace DKC
 {
     public class WeaponManager : MonoBehaviour
     {
-        [SerializeField] MeleeWeaponDamageCollider meleeDamageCollider;
+        public MeleeWeaponDamageCollider meleeDamageCollider;
 
         private void Awake()
         {
@@ -19,6 +19,8 @@ namespace DKC
             meleeDamageCollider.fireDamage = weapon.fireDamage;
             meleeDamageCollider.lightningDamage = weapon.lightningDamage;
             meleeDamageCollider.holyDamage = weapon.holyDamage;
+
+            meleeDamageCollider.lightAttack01Modifier = weapon.lightAttack01Modifier;
         }
     }
 }

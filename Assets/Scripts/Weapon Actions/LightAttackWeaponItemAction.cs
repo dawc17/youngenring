@@ -28,7 +28,7 @@ namespace DKC
         {
             if (playerPerformingAction.playerNetworkManager.isUsingRightHand.Value)
             {
-                playerPerformingAction.playerAnimationManager.PlayTargetAttackActionAnimation(lightAttack_01, true, true);
+                playerPerformingAction.playerAnimationManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, lightAttack_01, true, true);
             }
             if (playerPerformingAction.playerNetworkManager.isUsingLeftHand.Value)
             {

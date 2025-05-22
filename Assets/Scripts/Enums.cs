@@ -25,4 +25,9 @@ namespace DKC
         // left hips
         // back
     }
+
+    public enum AttackType
+    {
+        LightAttack01
+    }
 }

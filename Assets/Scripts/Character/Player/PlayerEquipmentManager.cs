@@ -247,5 +247,39 @@ namespace DKC
                 }
             }
         }
+
+        // damage colliders
+
+        public void OpenDamageCollider()
+        {
+            // open right weapon collider
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
+            }
+            // open left weapon collider
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
+            {
+                leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
+            }
+
+            // play sfx
+        }
+
+        public void CloseDamageCollider()
+        {
+            // close right weapon collider
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            }
+            // close left weapon collider
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
+            {
+                leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            }
+
+            // play sfx
+        }
     }
 }

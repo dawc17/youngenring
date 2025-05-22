@@ -29,14 +29,17 @@ namespace DKC
         // offensive poise damage modifier
 
         // weapon modifiers
-        // light attack modifier
+
+        [Header("Attack Modifiers")]
+        public float lightAttack01Modifier = 1.1f;
+
         // heavy attack modifier
         // critical hit modifier
 
-        [Header("Stamina Costs")]
+        [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
+        public float lightAttackStaminaCostModifier = 0.9f;
         // running attack stamina cost modifier
-        // light attack stamina cost modifier
         // heavy attack stamina cost modifier
 
         [Header("Actions")]

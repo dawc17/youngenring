@@ -53,7 +53,7 @@ namespace DKC
 
             character.characterNetworkManager.NotifyServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
-        public virtual void PlayTargetAttackActionAnimation(
+        public virtual void PlayTargetAttackActionAnimation(AttackType attackType,
             string targetAnimation,
             bool isPerformingAction,
             bool applyRootMotion = true,
@@ -65,6 +65,7 @@ namespace DKC
             // update animation set to current weapon animations
             // decide if our attack can be parried
             // tell the netwok manager if we are in an attacking flag (counter damage)
+            character.characterCombatManager.currentAttackType = attackType;
             character.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
 

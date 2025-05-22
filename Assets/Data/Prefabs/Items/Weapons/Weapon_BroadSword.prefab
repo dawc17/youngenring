@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18697e8bcea1ebd4c8f6a3dcb8f2c368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeDamageCollider: {fileID: 0}
+  meleeDamageCollider: {fileID: 936704004376416616}
 --- !u!1 &5311062458178727276
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,12 +199,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedff53ec94329245adc66e508f82550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageCollider: {fileID: 2079775695800335278}
   physicalDamage: 0
   magicDamage: 0
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
   characterCausingDamage: {fileID: 0}
+  lightAttack01Modifier: 0
 --- !u!1 &6490040875017731838
 GameObject:
   m_ObjectHideFlags: 0
