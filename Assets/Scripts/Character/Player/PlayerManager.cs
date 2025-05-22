@@ -9,6 +9,8 @@ namespace DKC
     {
         [Header("Debug Menu")]
         [SerializeField] private bool respawnCharacter = false;
+        [SerializeField] bool switchRightWeapon = false;
+        [SerializeField] bool switchLeftWeapon = false;
 
         [HideInInspector] public PlayerAnimationManager playerAnimationManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
@@ -157,6 +159,18 @@ namespace DKC
             {
                 respawnCharacter = false;
                 ReviveCharacter();
+            }
+
+            if (switchRightWeapon)
+            {
+                switchRightWeapon = false;
+                playerEquipmentManager.SwitchRightWeapon();
+            }
+
+            if (switchLeftWeapon)
+            {
+                switchLeftWeapon = false;
+                playerEquipmentManager.SwitchLeftWeapon();
             }
         }
     }

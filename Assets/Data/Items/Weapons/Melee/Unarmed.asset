@@ -16,7 +16,7 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemDescription: Your bare hands. Weak, useless and hurt if you punch too hard.
   itemID: 0
-  weaponModel: {fileID: 0}
+  weaponModel: {fileID: 6652906630964353354, guid: 6dc71a3eca181234da177201c530bb28, type: 3}
   strengthReq: 0
   dexterityReq: 0
   intelligenceReq: 0
