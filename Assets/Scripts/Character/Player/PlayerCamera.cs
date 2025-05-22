@@ -11,7 +11,7 @@ namespace DKC
 
         [HideInInspector] public PlayerManager player;
 
-        [Header("Camera Settings")] 
+        [Header("Camera Settings")]
         private float cameraSmoothSpeed = 1;
 
         [SerializeField] float upAndDownRotationSpeed = 220;
@@ -20,7 +20,7 @@ namespace DKC
         [SerializeField] float maximumPivot = 60; // highest look angle
         [SerializeField] float cameraCollisionRadius = 0.2f;
         [SerializeField] LayerMask collideWithLayers;
-        
+
         [Header("Camera Values")]
         private Vector3 cameraVelocity;
         private Vector3 cameraObjectPosition; // camera collisions moves the camera object to this position
@@ -29,7 +29,7 @@ namespace DKC
         [SerializeField] private float upAndDownLookAngle;
         private float cameraZPosition;
         private float targetCameraZPosition;
-        
+
         private void Awake()
         {
             if (instance == null)
@@ -41,7 +41,7 @@ namespace DKC
                 Destroy(gameObject);
             }
         }
-        
+
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
@@ -56,9 +56,6 @@ namespace DKC
                 HandleRotations();
                 HandleCollisions();
             }
-            // follow player
-            // rotate around player
-            // do not clip through walls
         }
 
         private void HandleFollowTarget()
@@ -72,7 +69,7 @@ namespace DKC
         {
             // if locked on force rotation to target
             // else rotate normally
-            
+
             // rotate left and right based on camera input
             leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontalInput * leftAndRightRotationSpeed) * Time.deltaTime;
             // rotate up and down and clamp
@@ -81,7 +78,7 @@ namespace DKC
 
             Vector3 cameraRotation = Vector3.zero;
             Quaternion targetRotation;
-            
+
             // rotate left and right
             cameraRotation.y = leftAndRightLookAngle;
             targetRotation = Quaternion.Euler(cameraRotation);
@@ -102,7 +99,7 @@ namespace DKC
             Vector3 direction = cameraObject.transform.position - cameraPivotTransform.position;
             direction.Normalize();
 
-            
+
             // check if object is in front of camera using a raycast from desired direction
             if (Physics.SphereCast(cameraPivotTransform.position, cameraCollisionRadius, direction, out hit,
                     Mathf.Abs(cameraZPosition), collideWithLayers))
@@ -112,13 +109,13 @@ namespace DKC
                 // then equate our target z position to the following
                 targetCameraZPosition = -(distanceFromObject - cameraCollisionRadius);
             }
-            
+
             // if our target position is less than our collision radius, we - our collision radius
             if (Mathf.Abs(targetCameraZPosition) < cameraCollisionRadius)
             {
                 targetCameraZPosition = -cameraCollisionRadius;
             }
-            
+
             // apply our finals position using a lerp over time
             cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
             cameraObject.transform.localPosition = cameraObjectPosition;

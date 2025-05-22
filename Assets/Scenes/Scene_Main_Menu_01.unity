@@ -4370,6 +4370,18 @@ PrefabInstance:
       propertyPath: youDiedPopUpCanvasGroup
       value: 
       objectReference: {fileID: 433161204}
+    - target: {fileID: 3805345367250874794, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805345367250874794, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805345367250874794, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4509825749403223148, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4391,6 +4403,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5116411452542129035, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175581071921049059, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175581071921049059, guid: 2296de24e58978aae8a24db9d819fcc4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

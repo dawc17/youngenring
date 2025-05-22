@@ -600,7 +600,7 @@ MonoBehaviour:
   youDiedPopUpGameObject: {fileID: 1312149655961739351}
   youDiedPopUpBackgroundText: {fileID: 8503154208473056704}
   youDiedPopUpText: {fileID: 5940814548335162175}
-  youDiedPopUpCanvasGroup: {fileID: 0}
+  youDiedPopUpCanvasGroup: {fileID: 3803807089053189430}
 --- !u!1 &6175805359146989005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,6 +1393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGameAsClient: 0
   playerUIHudManager: {fileID: 0}
+  playerUIPopupManager: {fileID: 0}
 --- !u!223 &8481563087836736423
 Canvas:
   m_ObjectHideFlags: 0

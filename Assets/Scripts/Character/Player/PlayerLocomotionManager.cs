@@ -9,15 +9,15 @@ namespace DKC
         [HideInInspector] public float verticalMovement;
         [HideInInspector] public float horizontalMovement;
         [HideInInspector] public float moveAmount;
-        
+
         [Header("Movement Settings")]
-        private Vector3 targetRotationDirection;
-        private Vector3 moveDirection;
         [SerializeField] float walkingSpeed = 2;
         [SerializeField] float runningSpeed = 5;
         [SerializeField] float sprintingSpeed = 7;
         [SerializeField] float rotationSpeed = 15;
         [SerializeField] int sprintingStaminaCost = 2;
+        private Vector3 targetRotationDirection;
+        private Vector3 moveDirection;
 
         [Header("Jump")]
         [SerializeField] private float jumpStaminaCost = 10;
@@ -26,13 +26,11 @@ namespace DKC
         [SerializeField] float freeFallSpeed = 2;
         private Vector3 jumpDirection;
 
-
         [Header("Dodge")]
-        private Vector3 rollDirection;
-
         [SerializeField] private float dodgeStaminaCost = 25;
         [SerializeField] private float backstepStaminaCost = 10;
-        
+        private Vector3 rollDirection;
+
         protected override void Awake()
         {
             base.Awake();
@@ -43,7 +41,7 @@ namespace DKC
         protected override void Update()
         {
             base.Update();
-            
+
             // if player is owner update values
             if (player.IsOwner)
             {
@@ -52,15 +50,15 @@ namespace DKC
                 player.characterNetworkManager.networkMoveAmount.Value = moveAmount;
             }
             else
-            {   
+            {
                 // if not, get values from network
                 moveAmount = player.characterNetworkManager.networkMoveAmount.Value;
                 verticalMovement = player.characterNetworkManager.animatorVerticalParameter.Value;
                 horizontalMovement = player.characterNetworkManager.animatorHorizontalParameter.Value;
-                
+
                 // if not locked on pass move amount
                 player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
-                
+
                 // if locked on pass vertical and horizontal
             }
         }
@@ -78,7 +76,7 @@ namespace DKC
             verticalMovement = PlayerInputManager.instance.verticalInput;
             horizontalMovement = PlayerInputManager.instance.horizontalInput;
             moveAmount = PlayerInputManager.instance.moveAmount;
-            
+
             // clamp later
         }
 
@@ -86,7 +84,7 @@ namespace DKC
         {
             if (!player.canMove)
                 return;
-            
+
             GetMovementValues();
             // movement dir is based on camera direction
             moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
@@ -94,7 +92,7 @@ namespace DKC
             moveDirection.Normalize();
             moveDirection.y = 0;
 
-            
+
             if (player.playerNetworkManager.isSprinting.Value)
             {
                 player.characterController.Move(moveDirection * (sprintingSpeed * Time.deltaTime));
@@ -138,18 +136,18 @@ namespace DKC
         {
             if (!player.canRotate)
                 return;
-            
+
             targetRotationDirection = Vector3.zero;
             targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
             targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
             targetRotationDirection.Normalize();
             targetRotationDirection.y = 0;
-            
+
             if (targetRotationDirection == Vector3.zero)
             {
                 targetRotationDirection = transform.forward;
             }
-            
+
             Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
             Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
             transform.rotation = targetRotation;
@@ -187,10 +185,10 @@ namespace DKC
         {
             if (player.isPerformingAction)
                 return;
-            
+
             if (player.playerNetworkManager.currentStamina.Value <= 0)
                 return;
-            
+
             // if moving:
             if (PlayerInputManager.instance.moveAmount > 0)
             {
@@ -203,7 +201,7 @@ namespace DKC
                 rollDirection.Normalize();
                 Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
                 player.transform.rotation = playerRotation;
-                
+
                 player.playerAnimationManager.PlayRollAnimation();
                 player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
             }
