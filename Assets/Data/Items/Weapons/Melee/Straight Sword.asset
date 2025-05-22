@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Straight Sword
   itemIcon: {fileID: 21300004, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
   itemDescription: A straight sword.
-  itemID: 0
+  itemID: 1
   weaponModel: {fileID: 4559498451390364768, guid: 3dfbac8becaa13d47a200e17e0396991, type: 3}
   strengthReq: 10
   dexterityReq: 10
@@ -28,4 +28,4 @@ MonoBehaviour:
   holyDamage: 0
   poiseDamage: 25
   baseStaminaCost: 20
-  oh_rbAction: {fileID: 11400000, guid: 3b1e50c781922a342be61745b1466bd3, type: 2}
+  oh_rbAction: {fileID: 11400000, guid: 237cb2dfd4109d24da20c0900af2f3c8, type: 2}

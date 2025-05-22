@@ -9,6 +9,7 @@ namespace DKC
 
         public virtual void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
+
             if (playerPerformingAction.IsOwner)
             {
                 playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = weaponPerformingAction.itemID;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 namespace DKC
 {
@@ -17,9 +18,12 @@ namespace DKC
 
         public void PerformWeaponBasedAction(WeaponItemAction weaponAction, WeaponItem weaponPerformingAction)
         {
-            weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
-
+            if (player.IsOwner)
+            {
+                weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
+            }
             // perform action on other clinents (notify server)
+            player.playerNetworkManager.NotifyServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, weaponAction.actionID, weaponPerformingAction.itemID);
 
         }
     }

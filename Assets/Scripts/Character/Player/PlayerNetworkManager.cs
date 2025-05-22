@@ -74,5 +74,40 @@ namespace DKC
             WeaponItem newWeapon = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(newID));
             player.playerCombatManager.currentWeaponBeingUsed = newWeapon;
         }
+
+        // item actions
+        [ServerRpc]
+        public void NotifyServerOfWeaponActionServerRpc(ulong clientID, int actionID, int weaponID)
+        {
+            if (IsServer)
+            {
+                NotifyServerOfWeaponActionClientRpc(clientID, actionID, weaponID);
+            }
+        }
+
+        [ClientRpc]
+        private void NotifyServerOfWeaponActionClientRpc(ulong clientID, int actionID, int weaponID)
+        {
+            // dont play action again if we are the one who performed it
+            // this is to prevent the action from being played twice
+            if (clientID != NetworkManager.Singleton.LocalClientId)
+            {
+                PlayWeaponAction(actionID, weaponID);
+            }
+        }
+
+        private void PlayWeaponAction(int actionID, int weaponID)
+        {
+            WeaponItemAction weaponAction = WorldActionManager.instance.GetWeaponItemActionByID(actionID);
+
+            if (weaponAction != null)
+            {
+                weaponAction.AttemptToPerformAction(player, WorldItemDatabase.Instance.GetWeaponByID(weaponID));
+            }
+            else
+            {
+                Debug.LogError("Weapon action not found, cannot play action!!!");
+            }
+        }
     }
 }
