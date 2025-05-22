@@ -2,22 +2,23 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Unity.Netcode;
+using System.Collections.Generic;
 
 namespace DKC
 {
     public class CharacterManager : NetworkBehaviour
     {
-        [Header("Status")] 
+        [Header("Status")]
         public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false,
             NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        
+
         [HideInInspector] public CharacterController characterController;
         [HideInInspector] public Animator animator;
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
         [HideInInspector] public CharacterEffectsManager characterEffectsManager;
         [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
-        
-        [Header("Flags")] 
+
+        [Header("Flags")]
         public bool isPerformingAction = false;
         public bool isJumping = false;
         public bool isGrounded = true;
@@ -26,16 +27,21 @@ namespace DKC
         public bool canMove = true;
 
 
-        
+
         protected virtual void Awake()
         {
-            DontDestroyOnLoad(this); 
-            
+            DontDestroyOnLoad(this);
+
             characterController = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+        }
+
+        protected virtual void Start()
+        {
+            IgnoreMyOwnColliders();
         }
 
         public override void OnNetworkSpawn()
@@ -64,21 +70,21 @@ namespace DKC
             {
                 // position
                 transform.position = Vector3.SmoothDamp(transform.position,
-                    characterNetworkManager.networkPosition.Value, 
+                    characterNetworkManager.networkPosition.Value,
                     ref characterNetworkManager.networkPositionVelocity,
                     characterNetworkManager.networkPositionSmoothTime);
-                
+
                 // rotation
                 transform.rotation = Quaternion.Slerp
-                    (transform.rotation, 
-                        characterNetworkManager.networkRotation.Value, 
+                    (transform.rotation,
+                        characterNetworkManager.networkRotation.Value,
                         characterNetworkManager.networkRotationSmoothTime);
             }
         }
 
         protected virtual void LateUpdate()
         {
-            
+
         }
 
         public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
@@ -87,9 +93,9 @@ namespace DKC
             {
                 characterNetworkManager.currentHealth.Value = 0;
                 isDead.Value = true;
-                
+
                 // reset any flags here that need to be reset
-                
+
                 // if we are not grounded, play an aerial death animation
 
                 if (!manuallySelectDeathAnimation)
@@ -100,15 +106,44 @@ namespace DKC
             // play death sfx
 
             yield return new WaitForSeconds(5);
-            
+
             // award players with runes
-            
+
             // disable character
         }
 
         public virtual void ReviveCharacter()
         {
-            
+
+        }
+
+        protected virtual void IgnoreMyOwnColliders()
+        {
+            Collider characterControllerCollider = GetComponent<Collider>();
+            Collider[] damageableChartacterColliders = GetComponentsInChildren<Collider>();
+
+            List<Collider> ignoreColliders = new List<Collider>();
+
+            // adds all of our damageable colliders to the ignore list
+            foreach (var collider in damageableChartacterColliders)
+            {
+
+                ignoreColliders.Add(collider);
+
+            }
+
+            // adds out character controller collider to the ignore list
+            // this is to prevent the character from colliding with itself
+            ignoreColliders.Add(characterControllerCollider);
+
+            // goes through all colliders and ignores them
+            foreach (var collider in ignoreColliders)
+            {
+                foreach (var otherCollider in ignoreColliders)
+                {
+                    Physics.IgnoreCollision(collider, otherCollider, true);
+                }
+            }
         }
     }
 }
