@@ -9,6 +9,9 @@ namespace DKC
         public WeaponModelInstatiationSlot rightHandSlot;
         public WeaponModelInstatiationSlot leftHandSlot;
 
+        [SerializeField] WeaponManager rightWeaponManager;
+        [SerializeField] WeaponManager leftWeaponManager;
+
         public GameObject rightHandWeaponModel;
         public GameObject leftHandWeaponModel;
 
@@ -51,13 +54,56 @@ namespace DKC
             LoadRightWeapon();
         }
 
+        // right weapon
+
+        public void SwitchRightWeapon()
+        {
+            if (!player.IsOwner)
+                return;
+
+            player.playerAnimationManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false);
+
+            WeaponItem selectedWeapon = null;
+
+            // disable two handing if we are twohanding
+            // check weapon index (we have 3 slots)
+
+            // add one to index to switch
+            player.playerInventoryManager.rightHandWeaponIndex += 1;
+
+            // reset index if out of bounds
+            if (player.playerInventoryManager.rightHandWeaponIndex < 0 || player.playerInventoryManager.rightHandWeaponIndex > 2)
+            {
+                player.playerInventoryManager.rightHandWeaponIndex = 0;
+            }
+
+            foreach (WeaponItem weapon in player.playerInventoryManager.weaponsInRightHandSlots)
+            {
+                // if weapon does not equal unarmed, proceed
+                if (player.playerInventoryManager.weaponsInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex].itemID != WorldItemDatabase.Instance.unarmedWeapon.itemID)
+                {
+                    selectedWeapon = player.playerInventoryManager.weaponsInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex];
+                    // assign network weapon id so it syncs for everyone
+                }
+            }
+        }
+
         public void LoadRightWeapon()
         {
             if (player.playerInventoryManager.currentRightHandWeapon != null)
             {
                 rightHandWeaponModel = Instantiate(player.playerInventoryManager.currentRightHandWeapon.weaponModel);
                 rightHandSlot.LoadWeapon(rightHandWeaponModel);
+                rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
+                rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
             }
+        }
+
+        // left weapon
+
+        public void SwitchLeftWeapon()
+        {
+
         }
 
         public void LoadLeftWeapon()
@@ -66,6 +112,8 @@ namespace DKC
             {
                 leftHandWeaponModel = Instantiate(player.playerInventoryManager.currentLeftHandWeapon.weaponModel);
                 leftHandSlot.LoadWeapon(leftHandWeaponModel);
+                leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
+                leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
             }
         }
     }
