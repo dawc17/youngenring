@@ -17,18 +17,19 @@ namespace DKC
         public float verticalInput;
         public float horizontalInput;
         public float moveAmount;
-        
+
         [Header("Camera Input")]
         [SerializeField] Vector2 cameraInput;
         public float cameraVerticalInput;
         public float cameraHorizontalInput;
 
-        [Header("Player Action Input")] 
+        [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+        [SerializeField] bool rb_input = false;
 
-        
+
         private void Awake()
         {
             if (instance == null)
@@ -46,6 +47,11 @@ namespace DKC
             DontDestroyOnLoad(gameObject);
             SceneManager.activeSceneChanged += OnSceneChange;
             instance.enabled = false;
+
+            if (playerControls != null)
+            {
+                playerControls.Disable();
+            }
         }
 
         private void OnSceneChange(Scene oldScene, Scene newScene)
@@ -53,10 +59,20 @@ namespace DKC
             if (newScene.buildIndex == WorldSaveGameManager.Instance.GetWorldSceneIndex())
             {
                 instance.enabled = true;
+
+                if (playerControls != null)
+                {
+                    playerControls.Enable();
+                }
             }
             else
             {
                 instance.enabled = false;
+
+                if (playerControls != null)
+                {
+                    playerControls.Disable();
+                }
             }
         }
 
@@ -64,7 +80,7 @@ namespace DKC
         {
             SceneManager.activeSceneChanged -= OnSceneChange;
         }
-        
+
         // if window is minimized disable controls
         private void OnApplicationFocus(bool hasFocus)
         {
@@ -86,11 +102,12 @@ namespace DKC
             if (playerControls == null)
             {
                 playerControls = new PlayerControls();
-                
+
                 playerControls.PlayerMovement.Movement.performed += i => movement = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.CameraControls.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerActions.RB.performed += i => rb_input = true;
 
                 playerControls.UI.LockCursor.performed += i =>
                 {
@@ -120,16 +137,17 @@ namespace DKC
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
+            HandleRBInput();
             //HandleGayInput();
         }
-        
+
         // MOVEMENT
 
         private void HandlePlayerMovementInput()
         {
             verticalInput = movement.y;
             horizontalInput = movement.x;
-            
+
             moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
 
             if (moveAmount <= 0.5 && moveAmount > 0)
@@ -144,9 +162,9 @@ namespace DKC
             // we use horizontal when strafing only
             if (player == null)
                 return;
-            
+
             player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
-            
+
             // if we are locked on pass the horizontal as well
         }
 
@@ -155,7 +173,7 @@ namespace DKC
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
         }
-        
+
         // ACTIONS
 
         private void HandleDodgeInput()
@@ -163,10 +181,10 @@ namespace DKC
             if (dodgeInput)
             {
                 dodgeInput = false;
-                
+
                 // return if ui is open
                 // perform a dodge
-                
+
                 player.playerLocomotionManager.AttemptToPerformDodge();
             }
         }
@@ -193,6 +211,23 @@ namespace DKC
 
                 // attempt to perform a jump
                 player.playerLocomotionManager.AttemptToPerformJump();
+            }
+        }
+
+        private void HandleRBInput()
+        {
+            if (rb_input)
+            {
+                rb_input = false;
+
+                // if window ui open, return
+
+                // attempt to perform a rb action
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                // todo: if we are twohanding run two hand action
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_rbAction, player.playerInventoryManager.currentRightHandWeapon);
             }
         }
     }

@@ -7,8 +7,8 @@ namespace DKC
     public class CharacterNetworkManager : NetworkBehaviour
     {
         private CharacterManager character;
-        
-        [Header("Position")] 
+
+        [Header("Position")]
         public NetworkVariable<Vector3> networkPosition =
             new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone,
                 NetworkVariableWritePermission.Owner);
@@ -19,7 +19,7 @@ namespace DKC
         public Vector3 networkPositionVelocity;
         public float networkPositionSmoothTime = 0.1f;
         public float networkRotationSmoothTime = 0.1f;
-        
+
         [Header("Animator")]
         public NetworkVariable<float> animatorHorizontalParameter = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> animatorVerticalParameter = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -27,7 +27,8 @@ namespace DKC
 
         [Header("Flags")]
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        
+        public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         [Header("Resources")]
         public NetworkVariable<float> currentStamina = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> maxStamina = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -38,7 +39,7 @@ namespace DKC
         public NetworkVariable<int> endurance = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> vitality = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-        
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -60,7 +61,7 @@ namespace DKC
                 }
             }
         }
-        
+
         [ServerRpc]
         public void NotifyServerOfActionAnimationServerRpc(ulong clientID, string animationID, bool applyRootMotion)
         {
@@ -69,7 +70,7 @@ namespace DKC
                 PlayActionAnimationForAllClientsClientRpc(clientID, animationID, applyRootMotion);
             }
         }
-        
+
         [ClientRpc]
         public void PlayActionAnimationForAllClientsClientRpc(ulong clientId, string animationID, bool applyRootMotion)
         {

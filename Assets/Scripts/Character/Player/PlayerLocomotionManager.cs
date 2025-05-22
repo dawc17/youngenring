@@ -112,7 +112,7 @@ namespace DKC
 
         private void HandleJumpingMovement()
         {
-            if (player.isJumping)
+            if (player.playerNetworkManager.isJumping.Value)
             {
                 player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
             }
@@ -224,7 +224,7 @@ namespace DKC
                 return;
 
             // if we are already jumping, return
-            if (player.isJumping)
+            if (player.playerNetworkManager.isJumping.Value)
                 return;
 
             // if we are in the air, return!!!
@@ -233,7 +233,7 @@ namespace DKC
 
             // lose stamina
             player.playerAnimationManager.PlayTargetActionAnimation("Main_Jump_01", false);
-            player.isJumping = true;
+            player.playerNetworkManager.isJumping.Value = true;
 
             player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
 

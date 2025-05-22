@@ -12,7 +12,7 @@ namespace Character.Player.UI
 
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
         [HideInInspector] public PlayerUIPopupManager playerUIPopupManager;
-        
+
         private void Awake()
         {
             // Check if an instance of this class already exists
@@ -24,7 +24,7 @@ namespace Character.Player.UI
             {
                 Destroy(gameObject);
             }
-            
+
             playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
             playerUIPopupManager = GetComponentInChildren<PlayerUIPopupManager>();
 
@@ -32,19 +32,26 @@ namespace Character.Player.UI
 
         private void Start()
         {
-            DontDestroyOnLoad(gameObject); 
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Update()
         {
             if (startGameAsClient)
             {
+                //if (WorldSaveGameManager.Instance.currentCharacterData.characterName == "")
+                //{
+                //    WorldSaveGameManager.Instance.ChangeCharacterData();
+                //}
+
                 startGameAsClient = false;
+                WorldSaveGameManager.Instance.currentCharacterData.vitality = 10;
+                WorldSaveGameManager.Instance.currentCharacterData.endurance = 10;
                 // we must first shut down because we have a host
                 NetworkManager.Singleton.Shutdown();
                 // start network as client
                 NetworkManager.Singleton.StartClient();
-            } 
+            }
         }
     }
 }

@@ -4994,6 +4994,14 @@ PrefabInstance:
       propertyPath: currentSlot
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5498247008716955234, guid: cca5b5628cf79f0f88fd3065f00ee0e5, type: 3}
+      propertyPath: currentCharacterData.vitality
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498247008716955234, guid: cca5b5628cf79f0f88fd3065f00ee0e5, type: 3}
+      propertyPath: currentCharacterData.endurance
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

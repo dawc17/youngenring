@@ -39,7 +39,8 @@ namespace DKC
         // light attack stamina cost modifier
         // heavy attack stamina cost modifier
 
-        // item based actions (rb, rt, lb, lt)
+        [Header("Actions")]
+        public WeaponItemAction oh_rbAction; // one handed right bumper action
 
         // ash of war
 

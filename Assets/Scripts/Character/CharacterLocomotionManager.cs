@@ -23,6 +23,10 @@ namespace DKC
 
         protected virtual void Update()
         {
+            // my dumbass forgot to return if character is not owner
+            if (!character.IsOwner)
+                return;
+
             HandleGroundCheck();
 
             if (character.isGrounded)
@@ -37,7 +41,7 @@ namespace DKC
             else
             {
                 // if we are not jumping and out faling velocity has not been set
-                if (!character.isJumping && !fallingVelocityHasBeenSet)
+                if (!character.characterNetworkManager.isJumping.Value && !fallingVelocityHasBeenSet)
                 {
                     fallingVelocityHasBeenSet = true;
                     yVelocity.y = fallStartYVelocity;

@@ -1,5 +1,6 @@
 using System.Collections;
 using Character.Player.UI;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,7 @@ namespace DKC
         [HideInInspector] public PlayerStatsManager playerStatsManager;
         [HideInInspector] public PlayerInventoryManager playerInventoryManager;
         [HideInInspector] public PlayerEquipmentManager playerEquipmentManager;
+        [HideInInspector] public PlayerCombatManager playerCombatManager;
 
         // ReSharper disable once RedundantOverriddenMember
         protected override void Awake()
@@ -30,6 +32,7 @@ namespace DKC
             playerStatsManager = GetComponent<PlayerStatsManager>();
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
+            playerCombatManager = GetComponent<PlayerCombatManager>();
         }
 
         protected override void Update()
@@ -63,6 +66,8 @@ namespace DKC
         {
             base.OnNetworkSpawn();
 
+            Debug.Log($"PlayerManager OnNetworkSpawn - IsOwner: {IsOwner}, IsServer: {IsServer}, IsClient: {IsClient}, NetworkObjectId: {NetworkObjectId}");
+
             if (IsOwner)
             {
                 PlayerCamera.instance.player = this;
@@ -84,10 +89,30 @@ namespace DKC
 
             // stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
-            
+
             // equipment
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
+            playerNetworkManager.currentWeaponBeingUsed.OnValueChanged += playerNetworkManager.OnCurrentWeaponBeingUsedIDChange;
+
+            // upon connecting if we are the owner of this character as a client, reload tour character data
+            // we dont run this if we are the server, since they are already loaded in
+
+            Debug.Log($"Loading game data check - IsOwner: {IsOwner}, IsServer: {IsServer}, Should load: {IsOwner && !IsServer}");
+
+            if (IsOwner && !IsServer)
+            {
+                StartCoroutine(LoadGameDataNextFrame());
+            }
+        }
+
+        private IEnumerator LoadGameDataNextFrame()
+        {
+            yield return null; // Wait one frame for network state to stabilize
+
+            //WorldSaveGameManager.Instance.currentCharacterData = WorldSaveGameManager.Instance.characterSlot01;
+
+            LoadGameFromCurrentCharacterData(ref WorldSaveGameManager.Instance.currentCharacterData);
         }
 
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
