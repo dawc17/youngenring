@@ -8,7 +8,10 @@ namespace DKC
     {
         public static WorldCharacterEffectsManager Instance;
 
-        [Header("Damage")] 
+        [Header("VFX")]
+        public GameObject bloodSplatterVFX;
+
+        [Header("Damage")]
         public TakeDamageEffect takeDamageEffect;
 
         [SerializeField] List<InstantCharacterEffect> instantEffects;
@@ -23,7 +26,7 @@ namespace DKC
             {
                 Destroy(gameObject);
             }
-            
+
             GenerateEffectIDs();
         }
 

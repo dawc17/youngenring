@@ -12,6 +12,9 @@ namespace DKC
 
         CharacterManager character;
 
+        [Header("VFX")]
+        [SerializeField] GameObject bloodSplatterVFX;
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -23,6 +26,20 @@ namespace DKC
             // process it
 
             effect.ProcessEffect(character);
+        }
+
+        public void PlayBloodSplatterVFX(Vector3 contactPoint)
+        {
+            // if we manually placed blood vfs on this model play its version
+            if (bloodSplatterVFX != null)
+            {
+                GameObject bloodSplatter = Instantiate(bloodSplatterVFX, contactPoint, Quaternion.identity);
+            }
+            // else use the default we have elsewhere
+            else
+            {
+                GameObject bloodSplatter = Instantiate(WorldCharacterEffectsManager.Instance.bloodSplatterVFX, contactPoint, Quaternion.identity);
+            }
         }
     }
 }
