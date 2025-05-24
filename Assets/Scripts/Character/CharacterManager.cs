@@ -18,6 +18,7 @@ namespace DKC
         [HideInInspector] public CharacterEffectsManager characterEffectsManager;
         [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
         [HideInInspector] public CharacterCombatManager characterCombatManager;
+        [HideInInspector] public CharacterSFXManager characterSFXManager;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -38,6 +39,7 @@ namespace DKC
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
             characterCombatManager = GetComponent<CharacterCombatManager>();
+            characterSFXManager = GetComponent<CharacterSFXManager>();
         }
 
         protected virtual void Start()

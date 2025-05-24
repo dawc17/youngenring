@@ -14,8 +14,6 @@ namespace DKC
             {
                 playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = weaponPerformingAction.itemID;
             }
-
-            Debug.Log($"Performing action {actionID} with weapon {weaponPerformingAction.itemName}");
         }
     }
 }

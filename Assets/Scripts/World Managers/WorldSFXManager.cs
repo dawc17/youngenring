@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace DKC
@@ -6,6 +5,9 @@ namespace DKC
     public class WorldSFXManager : MonoBehaviour
     {
         public static WorldSFXManager instance;
+
+        [Header("Damage SFX")]
+        public AudioClip[] physicalDamageSFX;
 
         [Header("Action SFX")]
         public AudioClip rollSFX;
@@ -25,6 +27,12 @@ namespace DKC
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+        }
+
+        public AudioClip ChooseRandomSFXFromArray(AudioClip[] array)
+        {
+            int index = Random.Range(0, array.Length);
+            return array[index];
         }
     }
 }
