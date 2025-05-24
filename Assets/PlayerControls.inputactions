@@ -269,15 +269,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Gay",
-                    "type": "Button",
-                    "id": "c7af64c2-b4f4-4264-9569-a2665cea63ec",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Sprint",
                     "type": "PassThrough",
                     "id": "29f7b8a7-0a49-4fb0-8e63-86ec717a1053",
@@ -305,9 +296,45 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RT",
+                    "type": "Button",
+                    "id": "9b1d18ef-e8c0-47f9-973f-41e22e798461",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Hold RT",
+                    "type": "PassThrough",
+                    "id": "5a6391b9-b1bb-4ed4-97ef-c0df104cf56f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(pressPoint=0.1)",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Lock On",
                     "type": "Button",
                     "id": "da28a59b-e4b0-4030-849b-03083365ab4f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Seek Left Lock On Target",
+                    "type": "Button",
+                    "id": "5e900f31-1b83-4fa6-8a5f-d993a3b68de5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Seek Right Lock On Target",
+                    "type": "Button",
+                    "id": "cc8fb9da-b040-4e1d-84f4-2fb9d6c49dbb",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -334,17 +361,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6238a48f-1e24-4daa-bfc3-1a346052696f",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Gay",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -416,6 +432,50 @@
                 },
                 {
                     "name": "",
+                    "id": "ec5ed1ec-8ce0-4948-8d42-76b33814c0d6",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28d8aae2-c867-4177-b23b-0a60be433c58",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3696a7b3-cfe5-4f4b-b41f-395d3e41c14f",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hold RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2273e7c7-b7f9-4fdc-9d79-29cfcce6e420",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hold RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d6c89f30-3ad9-4493-96f1-41228f3a5888",
                     "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
@@ -435,6 +495,28 @@
                     "action": "Lock On",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "497c399d-055a-4e64-9ea2-ccdc6632764f",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Seek Left Lock On Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf5c3fbe-b961-4c7c-825f-53b63d8f201d",
+                    "path": "<Gamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Seek Right Lock On Target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -446,15 +528,6 @@
                     "name": "X",
                     "type": "Button",
                     "id": "4eb1a48f-db7d-4e6e-93c2-f10a09d96dff",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Main Menu",
-                    "type": "Button",
-                    "id": "482c3c6a-be99-48c1-bd4c-fddbd232efb4",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -490,17 +563,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "X",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a6880306-3565-4429-bf1e-a307b69273d1",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Main Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

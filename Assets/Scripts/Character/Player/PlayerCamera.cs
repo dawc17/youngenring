@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,9 +35,16 @@ namespace DKC
         [SerializeField] private float lockOnSphereRadius = 20f; // radius to search for targets
         [SerializeField] private float minimumViewableAngle = -50;
         [SerializeField] private float maximumViewableAngle = 50;
+        [SerializeField] private float lockOnTargetFollowSpeed = 0.2f; // speed at which camera follows the target when locked on
+        [SerializeField] private float setCameraHeightSpeed = 0.05f; // speed of left and right rotation
+        [SerializeField] private float unlockedCameraHeight = 1.65f;
+        [SerializeField] private float lockedCameraHeight = 2.0f;
+        private Coroutine cameraLockOnHeightCoroutine;
         private List<CharacterManager> availableTargets = new List<CharacterManager>();
         public CharacterManager nearestTarget; // the closest target to the player
-        [SerializeField] private float lockOnTargetFollowSpeed = 0.2f; // speed at which camera follows the target when locked on
+        public CharacterManager leftLockOnTarget;
+        public CharacterManager rightLockOnTarget;
+
 
         private void Awake()
         {
@@ -210,6 +218,30 @@ namespace DKC
                             shortDistance = distanceFromTarget;
                             nearestTarget = availableTargets[k];
                         }
+
+                        if (player.playerNetworkManager.isLockedOn.Value)
+                        {
+                            Vector3 relativeEnemyPosition = player.transform.InverseTransformPoint(availableTargets[k].transform.position);
+
+                            var distanceFromLeftTarget = relativeEnemyPosition.x;
+                            var distanceFromRightTarget = relativeEnemyPosition.x;
+
+                            if (availableTargets[k] == player.playerCombatManager.currentTarget)
+                                continue; // skip current target
+
+                            // if the target is to the left of the player
+                            if (relativeEnemyPosition.x <= 0.00 && distanceFromLeftTarget > shortDistanceOfLeftTarget)
+                            {
+                                shortDistanceOfLeftTarget = distanceFromLeftTarget;
+                                leftLockOnTarget = availableTargets[k];
+                            }
+                            // if the target is to the right of the player
+                            else if (relativeEnemyPosition.x >= 0.00 && distanceFromRightTarget < shortDistanceOfRightTarget)
+                            {
+                                shortDistanceOfRightTarget = distanceFromRightTarget;
+                                rightLockOnTarget = availableTargets[k];
+                            }
+                        }
                     }
                     else
                     {
@@ -220,10 +252,96 @@ namespace DKC
             }
         }
 
+        public void SetLockCameraHeight()
+        {
+            if (cameraLockOnHeightCoroutine != null)
+            {
+                StopCoroutine(cameraLockOnHeightCoroutine);
+            }
+
+            cameraLockOnHeightCoroutine = StartCoroutine(SetCameraHeight());
+        }
+
         public void ClearLockOnTargets()
         {
             nearestTarget = null;
+            leftLockOnTarget = null;
+            rightLockOnTarget = null;
             availableTargets.Clear();
+        }
+
+        public IEnumerator WaitThenFindTarget()
+        {
+            while (player.isPerformingAction)
+            {
+                yield return null;
+            }
+
+            ClearLockOnTargets();
+            HandleLocatingLockOnTargets();
+
+            if (nearestTarget != null)
+            {
+                player.playerCombatManager.SetTarget(nearestTarget);
+                player.playerNetworkManager.isLockedOn.Value = true;
+            }
+
+            yield return null;
+        }
+
+        public IEnumerator SetCameraHeight()
+        {
+            float duration = 1;
+            float timer = 0;
+
+            Vector3 velocity = Vector3.zero;
+            Vector3 newLockedCameraHeight = new Vector3(cameraPivotTransform.transform.localPosition.x, lockedCameraHeight);
+            Vector3 newUnlockedCameraHeight = new Vector3(cameraPivotTransform.transform.localPosition.x, unlockedCameraHeight);
+
+            while (timer < duration)
+            {
+                timer += Time.deltaTime;
+
+                if (player != null)
+                {
+                    if (player.playerCombatManager.currentTarget != null)
+                    {
+                        cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(
+                            cameraPivotTransform.transform.localPosition,
+                            newLockedCameraHeight,
+                            ref velocity,
+                            setCameraHeightSpeed);
+                        cameraPivotTransform.transform.localRotation = Quaternion.Slerp(
+                            cameraPivotTransform.transform.localRotation,
+                            Quaternion.Euler(0, 0, 0),
+                            lockOnTargetFollowSpeed);
+                    }
+                    else
+                    {
+                        cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(
+                            cameraPivotTransform.transform.localPosition,
+                            newUnlockedCameraHeight,
+                            ref velocity,
+                            setCameraHeightSpeed);
+                    }
+                }
+                yield return null;
+            }
+
+            if (player != null)
+            {
+                if (player.playerCombatManager.currentTarget != null)
+                {
+                    cameraPivotTransform.transform.localPosition = newLockedCameraHeight;
+                    cameraPivotTransform.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                }
+                else
+                {
+                    cameraPivotTransform.transform.localPosition = newUnlockedCameraHeight;
+                }
+            }
+
+            yield return null;
         }
     }
 }

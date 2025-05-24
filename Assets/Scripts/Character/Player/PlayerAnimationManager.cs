@@ -23,12 +23,13 @@ namespace DKC
                 player.transform.rotation *= player.animator.deltaRotation;
             }
         }
-        
+
         public void PlayRollAnimation()
         {
             // Set root motion to true before starting animation
             player.applyRootMotion = true;
             PlayTargetActionAnimation("Roll_Forward_01", true, true, false, false);
+            player.playerLocomotionManager.isRolling = true;
         }
 
         public void PlayBackstepAnimation()

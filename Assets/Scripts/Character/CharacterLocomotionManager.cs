@@ -16,6 +16,10 @@ namespace DKC
         [SerializeField] protected float fallStartYVelocity = -5; // the force at which the character begins to all (gets bigger the longer you fall)
         protected bool fallingVelocityHasBeenSet = false;
         protected float inAirTimer = 0;
+
+        [Header("Flags")]
+        public bool isRolling = false;
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();

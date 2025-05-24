@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 namespace DKC
 {
@@ -24,7 +25,11 @@ namespace DKC
         public float cameraHorizontalInput;
 
         [Header("Lock On Input")]
-        [SerializeField] bool lockOnInput = false;
+        [SerializeField] bool lockOnInput;
+        [SerializeField] bool lockOnLeftInput;
+        [SerializeField] bool lockOnRightInput;
+        private Coroutine lockOnCoroutine;
+
 
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
@@ -111,6 +116,8 @@ namespace DKC
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.RB.performed += i => rb_input = true;
+                playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOnLeftInput = true;
+                playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOnRightInput = true;
 
                 // lock on input
                 playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
@@ -145,6 +152,7 @@ namespace DKC
             HandleJumpInput();
             HandleRBInput();
             HandleLockOnInput();
+            HandleLockOnSwitchTargetInput();
         }
 
         // MOVEMENT
@@ -156,11 +164,11 @@ namespace DKC
 
             moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
 
-            if (moveAmount <= 0.5 && moveAmount > 0)
+            if (moveAmount <= 0.5f && moveAmount > 0)
             {
                 moveAmount = 0.5f;
             }
-            else if (moveAmount > 0.5 && moveAmount <= 1)
+            else if (moveAmount > 0.5f && moveAmount <= 1)
             {
                 moveAmount = 1;
             }
@@ -169,7 +177,17 @@ namespace DKC
             if (player == null)
                 return;
 
-            player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+            {
+                player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            }
+            else
+            {
+                // if we are locked on, pass the horizontal input
+                player.playerAnimationManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
+            }
+
+            //player.playerAnimationManager.UpdateAnimatorMovementParameters(0, moveAmount, //player.playerNetworkManager.isSprinting.Value);
 
             // if we are locked on pass the horizontal as well
         }
@@ -191,9 +209,17 @@ namespace DKC
                 if (player.playerCombatManager.currentTarget.isDead.Value)
                 {
                     player.playerNetworkManager.isLockedOn.Value = false;
+                    lockOnCoroutine = StartCoroutine(PlayerCamera.instance.WaitThenFindTarget());
                 }
 
                 // attempt to find new target
+
+                // this assures us that the coroutine is not running multiple times
+                if (lockOnCoroutine != null)
+                {
+                    StopCoroutine(lockOnCoroutine);
+                }
+
             }
 
             if (lockOnInput && player.playerNetworkManager.isLockedOn.Value)
@@ -219,6 +245,39 @@ namespace DKC
                 {
                     player.playerCombatManager.SetTarget(PlayerCamera.instance.nearestTarget);
                     player.playerNetworkManager.isLockedOn.Value = true;
+                }
+            }
+        }
+
+        private void HandleLockOnSwitchTargetInput()
+        {
+            if (lockOnLeftInput)
+            {
+                lockOnLeftInput = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.instance.leftLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.instance.leftLockOnTarget);
+                    }
+                }
+            }
+
+            if (lockOnRightInput)
+            {
+                lockOnRightInput = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.instance.rightLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.instance.rightLockOnTarget);
+                    }
                 }
             }
         }
