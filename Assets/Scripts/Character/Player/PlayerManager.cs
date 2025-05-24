@@ -65,6 +65,7 @@ namespace DKC
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
             Debug.Log($"PlayerManager OnNetworkSpawn - IsOwner: {IsOwner}, IsServer: {IsServer}, IsClient: {IsClient}, NetworkObjectId: {NetworkObjectId}");
 
@@ -103,6 +104,22 @@ namespace DKC
             if (IsOwner && !IsServer)
             {
                 StartCoroutine(LoadGameDataNextFrame());
+            }
+        }
+
+        private void OnClientConnectedCallback(ulong clientId)
+        {
+            GameSessionManager.Instance.AddPlayerToActivePlayers(this);
+
+            if (!IsServer && IsOwner)
+            {
+                foreach (var player in GameSessionManager.Instance.players)
+                {
+                    if (player != this)
+                    {
+                        player.LoadOtherPlayerCharacterWhenJoiningServer();
+                    }
+                }
             }
         }
 
@@ -176,6 +193,15 @@ namespace DKC
 
             PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
             PlayerUIManager.instance.playerUIHudManager.SetMaxHealthValue(playerNetworkManager.maxHealth.Value);
+        }
+
+        public void LoadOtherPlayerCharacterWhenJoiningServer()
+        {
+            // sync weapons
+            playerNetworkManager.OnCurrentRightHandWeaponIDChange(0, playerNetworkManager.currentRightHandWeaponID.Value);
+            playerNetworkManager.OnCurrentLeftHandWeaponIDChange(0, playerNetworkManager.currentLeftHandWeaponID.Value);
+
+            // sync armor
         }
 
         private void DebugMenu()
