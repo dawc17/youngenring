@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rapier
   m_EditorClassIdentifier: 
   itemName: Rapier
-  itemIcon: {fileID: 21300004, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+  itemIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   itemDescription: A fancy rapier.
   itemID: 0
   weaponModel: {fileID: 3080142712711833722, guid: 2801f8a4f7dc7e24aad716a2bfc9d9be, type: 3}
@@ -27,4 +27,8 @@ MonoBehaviour:
   lightningDamage: 0
   holyDamage: 0
   poiseDamage: 25
+  lightAttack01Modifier: 1.1
   baseStaminaCost: 20
+  lightAttackStaminaCostModifier: 0.9
+  oh_rbAction: {fileID: 0}
+  oh_rtAction: {fileID: 0}

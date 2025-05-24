@@ -30,13 +30,19 @@ namespace DKC
         [SerializeField] bool lockOnRightInput;
         private Coroutine lockOnCoroutine;
 
-
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
-        [SerializeField] bool rb_input = false;
+        [SerializeField] bool switchRightWeaponInput = false;
+        [SerializeField] bool switchLeftWeaponInput = false;
 
+        [Header("Trigger Inputs")]
+        [SerializeField] bool rt_input = false;
+        [SerializeField] bool hold_rt_input = false;
+
+        [Header("Bumper Inputs")]
+        [SerializeField] bool rb_input = false;
 
         private void Awake()
         {
@@ -111,16 +117,26 @@ namespace DKC
             {
                 playerControls = new PlayerControls();
 
+                // movement
                 playerControls.PlayerMovement.Movement.performed += i => movement = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.CameraControls.performed += i => cameraInput = i.ReadValue<Vector2>();
+
+                // actions
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerActions.SwitchRightWeapon.performed += i => switchRightWeaponInput = true;
+                playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switchLeftWeaponInput = true;
+
+                // attacks
                 playerControls.PlayerActions.RB.performed += i => rb_input = true;
-                playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOnLeftInput = true;
-                playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOnRightInput = true;
+                playerControls.PlayerActions.RT.performed += i => rt_input = true;
+                playerControls.PlayerActions.HoldRT.performed += i => hold_rt_input = true;
+                playerControls.PlayerActions.HoldRT.canceled += i => hold_rt_input = false;
 
                 // lock on input
                 playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
+                playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOnLeftInput = true;
+                playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOnRightInput = true;
 
                 playerControls.UI.LockCursor.performed += i =>
                 {
@@ -150,9 +166,11 @@ namespace DKC
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
-            HandleRBInput();
             HandleLockOnInput();
             HandleLockOnSwitchTargetInput();
+            HandleRBInput();
+            HandleRTInput();
+            HandleHoldRTInput();
         }
 
         // MOVEMENT
@@ -338,6 +356,31 @@ namespace DKC
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_rbAction, player.playerInventoryManager.currentRightHandWeapon);
             }
         }
-    }
 
+        private void HandleRTInput()
+        {
+            if (rt_input)
+            {
+                rt_input = false;
+
+                // if window ui open, return
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                // attempt to perform a rt action
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_rtAction, player.playerInventoryManager.currentRightHandWeapon);
+            }
+
+        }
+
+        private void HandleHoldRTInput()
+        {
+            if (player.isPerformingAction)
+            {
+                if (player.playerNetworkManager.isUsingRightHand.Value)
+                {
+                    player.playerNetworkManager.isChargingAttack.Value = hold_rt_input;
+                }
+            }
+        }
+    }
 }

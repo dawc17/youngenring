@@ -21,6 +21,8 @@ namespace DKC
             meleeDamageCollider.holyDamage = weapon.holyDamage;
 
             meleeDamageCollider.lightAttack01Modifier = weapon.lightAttack01Modifier;
+            meleeDamageCollider.heavyAttack01Modifier = weapon.heavyAttack01Modifier;
+            meleeDamageCollider.chargedAttack01Modifier = weapon.chargedAttack01Modifier;
         }
     }
 }

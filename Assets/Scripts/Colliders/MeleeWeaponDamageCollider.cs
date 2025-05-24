@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace DKC
 {
@@ -9,6 +10,8 @@ namespace DKC
 
         [Header("Weapon Attack Modifiers")]
         public float lightAttack01Modifier;
+        public float heavyAttack01Modifier;
+        public float chargedAttack01Modifier;
 
         protected override void Awake()
         {
@@ -68,6 +71,12 @@ namespace DKC
             {
                 case AttackType.LightAttack01:
                     ApplyAttackDamageModifiers(lightAttack01Modifier, damageEffect);
+                    break;
+                case AttackType.HeavyAttack01:
+                    ApplyAttackDamageModifiers(heavyAttack01Modifier, damageEffect);
+                    break;
+                case AttackType.ChargedAttack01:
+                    ApplyAttackDamageModifiers(chargedAttack01Modifier, damageEffect);
                     break;
                 default:
                     break;

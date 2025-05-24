@@ -62,6 +62,44 @@ namespace DKC
             PlayerCamera.instance.HandleAllCameraActions();
         }
 
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectedCallback;
+
+            if (IsOwner)
+            {
+                // update the total amout of stat when the stat linked changed
+                playerNetworkManager.vitality.OnValueChanged -= playerNetworkManager.SetNewMaxHealthValue;
+                playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxStaminaValue;
+
+                // updates stat bars when health or stamina changes
+                playerNetworkManager.currentHealth.OnValueChanged -=
+                    PlayerUIManager.instance.playerUIHudManager.SetNewHealthValue;
+
+                playerNetworkManager.currentStamina.OnValueChanged -=
+                    PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue;
+                playerNetworkManager.currentStamina.OnValueChanged -= playerStatsManager.ResetStaminaRegenTimer;
+            }
+
+            // stats
+            playerNetworkManager.currentHealth.OnValueChanged -= playerNetworkManager.CheckHP;
+
+            // lock on
+            playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockonChanged;
+            playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged -=
+                playerNetworkManager.OnLockOnTargetIDChanged;
+
+            // equipment
+            playerNetworkManager.currentRightHandWeaponID.OnValueChanged -= playerNetworkManager.OnCurrentRightHandWeaponIDChange;
+            playerNetworkManager.currentLeftHandWeaponID.OnValueChanged -= playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
+            playerNetworkManager.currentWeaponBeingUsed.OnValueChanged -= playerNetworkManager.OnCurrentWeaponBeingUsedIDChange;
+
+            // flags breh
+            playerNetworkManager.isChargingAttack.OnValueChanged -= playerNetworkManager.OnIsChargingAttackChanged;
+        }
+
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -99,6 +137,9 @@ namespace DKC
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
             playerNetworkManager.currentWeaponBeingUsed.OnValueChanged += playerNetworkManager.OnCurrentWeaponBeingUsedIDChange;
 
+            // flags breh
+            playerNetworkManager.isChargingAttack.OnValueChanged += playerNetworkManager.OnIsChargingAttackChanged;
+
             // upon connecting if we are the owner of this character as a client, reload tour character data
             // we dont run this if we are the server, since they are already loaded in
 
@@ -106,7 +147,7 @@ namespace DKC
 
             if (IsOwner && !IsServer)
             {
-                StartCoroutine(LoadGameDataNextFrame());
+                LoadGameFromCurrentCharacterData(ref WorldSaveGameManager.Instance.currentCharacterData);
             }
         }
 
@@ -124,15 +165,6 @@ namespace DKC
                     }
                 }
             }
-        }
-
-        private IEnumerator LoadGameDataNextFrame()
-        {
-            yield return null; // Wait one frame for network state to stabilize
-
-            //WorldSaveGameManager.Instance.currentCharacterData = WorldSaveGameManager.Instance.characterSlot01;
-
-            LoadGameFromCurrentCharacterData(ref WorldSaveGameManager.Instance.currentCharacterData);
         }
 
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)

@@ -32,9 +32,8 @@ namespace DKC
 
         [Header("Attack Modifiers")]
         public float lightAttack01Modifier = 1.1f;
-
-        // heavy attack modifier
-        // critical hit modifier
+        public float heavyAttack01Modifier = 1.4f;
+        public float chargedAttack01Modifier = 2.0f;
 
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
@@ -44,6 +43,7 @@ namespace DKC
 
         [Header("Actions")]
         public WeaponItemAction oh_rbAction; // one handed right bumper action
+        public WeaponItemAction oh_rtAction; // one handed right trigger action
 
         // ash of war
 
