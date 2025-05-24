@@ -23,6 +23,9 @@ namespace DKC
         public float cameraVerticalInput;
         public float cameraHorizontalInput;
 
+        [Header("Lock On Input")]
+        [SerializeField] bool lockOnInput = false;
+
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
@@ -109,6 +112,9 @@ namespace DKC
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.RB.performed += i => rb_input = true;
 
+                // lock on input
+                playerControls.PlayerActions.LockOn.performed += i => lockOnInput = true;
+
                 playerControls.UI.LockCursor.performed += i =>
                 {
                     if (player == null)
@@ -138,7 +144,7 @@ namespace DKC
             HandleSprintInput();
             HandleJumpInput();
             HandleRBInput();
-            //HandleGayInput();
+            HandleLockOnInput();
         }
 
         // MOVEMENT
@@ -168,10 +174,53 @@ namespace DKC
             // if we are locked on pass the horizontal as well
         }
 
+        // CAMERA
         private void HandleCameraMovementInput()
         {
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
+        }
+
+        private void HandleLockOnInput()
+        {
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                if (player.playerCombatManager.currentTarget == null)
+                    return;
+
+                if (player.playerCombatManager.currentTarget.isDead.Value)
+                {
+                    player.playerNetworkManager.isLockedOn.Value = false;
+                }
+
+                // attempt to find new target
+            }
+
+            if (lockOnInput && player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOnInput = false;
+                PlayerCamera.instance.ClearLockOnTargets();
+                player.playerNetworkManager.isLockedOn.Value = false;
+                // are we already locked on?
+                // is our current target dead?
+                return;
+
+            }
+
+            if (lockOnInput && !player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOnInput = false;
+                // if using ranged weapon, return
+
+                // enable lock on
+                PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                if (PlayerCamera.instance.nearestTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.instance.nearestTarget);
+                    player.playerNetworkManager.isLockedOn.Value = true;
+                }
+            }
         }
 
         // ACTIONS

@@ -349,6 +349,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6145459289717930260}
+  - {fileID: 8857966107702845834}
   m_Father: {fileID: 8165609922626323833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1344451805963655176
@@ -1276,6 +1277,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3806588308313651175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8857966107702845834}
+  m_Layer: 6
+  m_Name: Lock On Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8857966107702845834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3806588308313651175}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -19, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6425030623855983326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3954121094012622565
 GameObject:
   m_ObjectHideFlags: 0
@@ -3602,6 +3634,7 @@ MonoBehaviour:
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
+  characterSFXManager: {fileID: 0}
   isPerformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -3629,7 +3662,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6537f27e47c65c440afce2142b97dce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
   currentAttackType: 0
+  lockOnTransform: {fileID: 8857966107702845834}
   currentWeaponBeingUsed: {fileID: 0}
 --- !u!114 &5101922324819833685
 MonoBehaviour:
@@ -3660,6 +3695,8 @@ MonoBehaviour:
   isSprinting:
     m_InternalValue: 0
   isJumping:
+    m_InternalValue: 0
+  isLockedOn:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 0
@@ -3812,6 +3849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4517730348019474a81616a06a67c7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplatterVFX: {fileID: 0}
   effectToTest: {fileID: 11400000, guid: 2d68bcae96a413d438d853b0cc1a7d0f, type: 2}
   processEffect: 0
 --- !u!114 &182460666487959517
@@ -3826,6 +3864,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164e50141eee2dc42bb1fa2b7113dbab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastDamageAnimationPlayed: 
+  hit_ForwardMedium01: hit_ForwardMedium01
+  hit_ForwardMedium02: hit_ForwardMedium02
+  hit_BackwardMedium01: hit_BackwardMedium01
+  hit_BackwardMedium02: hit_BackwardMedium02
+  hit_LeftMedium01: hit_LeftMedium01
+  hit_LeftMedium02: hit_LeftMedium02
+  hit_RightMedium01: hit_RightMedium01
+  hit_RightMedium02: hit_RightMedium02
+  forwardMediumDamageAnimations: []
+  backwardMediumDamageAnimations: []
+  leftMediumDamageAnimations: []
+  rightMediumDamageAnimations: []
 --- !u!114 &4586929084184031230
 MonoBehaviour:
   m_ObjectHideFlags: 0

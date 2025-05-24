@@ -67,8 +67,6 @@ namespace DKC
             base.OnNetworkSpawn();
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
-            Debug.Log($"PlayerManager OnNetworkSpawn - IsOwner: {IsOwner}, IsServer: {IsServer}, IsClient: {IsClient}, NetworkObjectId: {NetworkObjectId}");
-
             if (IsOwner)
             {
                 PlayerCamera.instance.player = this;
@@ -90,6 +88,11 @@ namespace DKC
 
             // stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
+
+            // lock on
+            playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockonChanged;
+            playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged +=
+                playerNetworkManager.OnLockOnTargetIDChanged;
 
             // equipment
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
@@ -202,6 +205,12 @@ namespace DKC
             playerNetworkManager.OnCurrentLeftHandWeaponIDChange(0, playerNetworkManager.currentLeftHandWeaponID.Value);
 
             // sync armor
+
+            // lock on
+            if (playerNetworkManager.isLockedOn.Value)
+            {
+                playerNetworkManager.OnLockOnTargetIDChanged(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
+            }
         }
 
         private void DebugMenu()
