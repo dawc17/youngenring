@@ -65,5 +65,19 @@ namespace DKC
 
             return false; // Default case, cannot damage unknown targets
         }
+
+        public float GetAngleOfTarget(Transform characterTransform, Vector3 directionOfTarget)
+        {
+            directionOfTarget.y = 0; // Ignore vertical angle
+            float viewableAngle = Vector3.Angle(characterTransform.forward, directionOfTarget);
+            Vector3 cross = Vector3.Cross(characterTransform.forward, directionOfTarget);
+
+            if (cross.y < 0)
+            {
+                viewableAngle = -viewableAngle;
+            }
+
+            return viewableAngle; // Return the angle in degrees
+        }
     }
 }

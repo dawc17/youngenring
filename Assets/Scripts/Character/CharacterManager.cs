@@ -55,6 +55,9 @@ namespace DKC
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+
+            characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
+
             if (!IsOwner)
             {
                 if (characterController != null)
@@ -62,6 +65,12 @@ namespace DKC
                     characterController.enabled = false;
                 }
             }
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+            characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
         }
 
         protected virtual void Update()

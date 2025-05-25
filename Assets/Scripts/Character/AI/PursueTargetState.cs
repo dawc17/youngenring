@@ -26,6 +26,8 @@ namespace DKC
                 aiCharacter.navMeshAgent.enabled = true;
             }
 
+            aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
+
             // if we are within combat range switch to combat state
 
             // if target is not reachable and far away return home

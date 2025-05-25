@@ -4,6 +4,10 @@ namespace DKC
 {
     public class AICharacterCombatManager : CharacterCombatManager
     {
+        [Header("Viewable Angle")]
+        public float viewableAngle;
+        public Vector3 directionOfTarget;
+
         [Header("Detection")]
         [SerializeField] private float detectionRadius = 15f;
         [SerializeField] private float minimumDetectionAngle = -35f;
@@ -36,9 +40,9 @@ namespace DKC
                 {
                     // if found, they have to be within our viewable angle
                     Vector3 directionOfTarget = targetCharacter.transform.position - aiCharacter.transform.position;
-                    float viewableAngle = Vector3.Angle(directionOfTarget, aiCharacter.transform.forward);
+                    float angleOfTarget = Vector3.Angle(directionOfTarget, aiCharacter.transform.forward);
 
-                    if (viewableAngle > minimumDetectionAngle && viewableAngle < maximumDetectionAngle)
+                    if (angleOfTarget > minimumDetectionAngle && angleOfTarget < maximumDetectionAngle)
                     {
                         if (Physics.Linecast(
                             aiCharacter.characterCombatManager.lockOnTransform.position,
@@ -50,11 +54,40 @@ namespace DKC
                         }
                         else
                         {
+                            directionOfTarget = targetCharacter.transform.position - aiCharacter.transform.position;
+                            viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, directionOfTarget);
                             aiCharacter.characterCombatManager.SetTarget(targetCharacter);
                             Debug.Log($"Target acquired: {targetCharacter.name}");
+                            PivotTowardsTarget(aiCharacter);
                         }
                     }
                 }
+            }
+        }
+
+        public void PivotTowardsTarget(AICharacterManager aiCharacter)
+        {
+            if (aiCharacter.isPerformingAction)
+            {
+                return; // Do not pivot if performing an action
+            }
+
+            if (viewableAngle >= 61 && viewableAngle <= 110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Zombie_Turn_Right90", true);
+            }
+            else if (viewableAngle <= -61 && viewableAngle >= -110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Zombie_Turn_Left90", true);
+            }
+
+            if (viewableAngle >= 146 && viewableAngle <= 180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Zombie_Turn_180", true);
+            }
+            else if (viewableAngle <= -146 && viewableAngle >= -180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Zombie_Turn_180", true);
             }
         }
     }
