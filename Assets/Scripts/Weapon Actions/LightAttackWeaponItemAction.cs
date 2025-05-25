@@ -6,6 +6,7 @@ namespace DKC
     public class LightAttackWeaponItemAction : WeaponItemAction
     {
         [SerializeField] string lightAttack_01 = "Main_Light_Attack_01"; // main = main hand (right)
+        [SerializeField] string lightAttack_02 = "Main_Light_Attack_02";
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
@@ -26,13 +27,26 @@ namespace DKC
 
         private void PerformLightAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
-            if (playerPerformingAction.playerNetworkManager.isUsingRightHand.Value)
+
+            // if we are attacking and we can combo
+            if (playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon && playerPerformingAction.isPerformingAction)
+            {
+                playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon = false;
+
+                // perform an attack based on the previous attack we just played
+                if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerformed == lightAttack_01)
+                {
+                    playerPerformingAction.playerAnimationManager.PlayTargetAttackActionAnimation(AttackType.LightAttack02, lightAttack_02, true, true);
+                }
+                else
+                {
+                    playerPerformingAction.playerAnimationManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, lightAttack_01, true, true);
+                }
+            }
+            // otherwise just perform a regular attack
+            else if (!playerPerformingAction.isPerformingAction)
             {
                 playerPerformingAction.playerAnimationManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, lightAttack_01, true, true);
-            }
-            if (playerPerformingAction.playerNetworkManager.isUsingLeftHand.Value)
-            {
-
             }
         }
     }

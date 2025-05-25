@@ -168,6 +168,7 @@ namespace DKC
             // decide if our attack can be parried
             // tell the netwok manager if we are in an attacking flag (counter damage)
             character.characterCombatManager.currentAttackType = attackType;
+            character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
             character.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
 
@@ -176,6 +177,17 @@ namespace DKC
             character.canRotate = canRotate;
 
             character.characterNetworkManager.NotifyServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+        }
+
+        // animation event calls
+        public virtual void EnableCanDoCombo()
+        {
+
+        }
+
+        public virtual void DisableCanDoCombo()
+        {
+
         }
     }
 }

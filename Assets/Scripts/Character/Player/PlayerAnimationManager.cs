@@ -38,9 +38,23 @@ namespace DKC
             PlayTargetActionAnimation("Backstep_01", true, true, false, false);
         }
 
-        public void PlayGayAnimation()
+        // animation event calls
+        public override void EnableCanDoCombo()
         {
-            PlayTargetActionAnimation("Gay_01", true, true, false, false);
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                player.playerCombatManager.canComboWithMainHandWeapon = true;
+            }
+            else
+            {
+                // enable offhand combo
+            }
+        }
+
+        public override void DisableCanDoCombo()
+        {
+            player.playerCombatManager.canComboWithMainHandWeapon = false;
+            // disable offhand combo
         }
     }
 }
