@@ -10,8 +10,11 @@ namespace DKC
 
         [Header("Weapon Attack Modifiers")]
         public float lightAttack01Modifier;
+        public float lightAttack02Modifier;
         public float heavyAttack01Modifier;
+        public float heavyAttack02Modifier;
         public float chargedAttack01Modifier;
+        public float chargedAttack02Modifier;
 
         protected override void Awake()
         {
@@ -72,11 +75,20 @@ namespace DKC
                 case AttackType.LightAttack01:
                     ApplyAttackDamageModifiers(lightAttack01Modifier, damageEffect);
                     break;
+                case AttackType.LightAttack02:
+                    ApplyAttackDamageModifiers(lightAttack02Modifier, damageEffect);
+                    break;
                 case AttackType.HeavyAttack01:
                     ApplyAttackDamageModifiers(heavyAttack01Modifier, damageEffect);
                     break;
+                case AttackType.HeavyAttack02:
+                    ApplyAttackDamageModifiers(heavyAttack02Modifier, damageEffect);
+                    break;
                 case AttackType.ChargedAttack01:
                     ApplyAttackDamageModifiers(chargedAttack01Modifier, damageEffect);
+                    break;
+                case AttackType.ChargedAttack02:
+                    ApplyAttackDamageModifiers(chargedAttack02Modifier, damageEffect);
                     break;
                 default:
                     break;

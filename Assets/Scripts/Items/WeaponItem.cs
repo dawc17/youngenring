@@ -31,9 +31,12 @@ namespace DKC
         // weapon modifiers
 
         [Header("Attack Modifiers")]
-        public float lightAttack01Modifier = 1.1f;
+        public float lightAttack01Modifier = 1.0f;
+        public float lightAttack02Modifier = 1.2f;
         public float heavyAttack01Modifier = 1.4f;
+        public float heavyAttack02Modifier = 1.6f;
         public float chargedAttack01Modifier = 2.0f;
+        public float chargedAttack02Modifier = 2.3f;
 
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
