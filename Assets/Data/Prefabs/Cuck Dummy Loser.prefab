@@ -3385,6 +3385,8 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 7708091327917222177}
+  viewableAngle: 0
+  directionOfTarget: {x: 0, y: 0, z: 0}
   detectionRadius: 15
   minimumDetectionAngle: -35
   maximumDetectionAngle: 35
