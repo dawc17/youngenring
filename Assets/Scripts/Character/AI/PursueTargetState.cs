@@ -26,6 +26,12 @@ namespace DKC
                 aiCharacter.navMeshAgent.enabled = true;
             }
 
+            // if our target is outside the characters foc pivot to face them
+            if (aiCharacter.aiCharacterCombatManager.viewableAngle < aiCharacter.aiCharacterCombatManager.minimumDetectionAngle || aiCharacter.aiCharacterCombatManager.viewableAngle > aiCharacter.aiCharacterCombatManager.maximumDetectionAngle)
+            {
+                aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+            }
+
             aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
 
             // if we are within combat range switch to combat state

@@ -10,8 +10,8 @@ namespace DKC
 
         [Header("Detection")]
         [SerializeField] private float detectionRadius = 15f;
-        [SerializeField] private float minimumDetectionAngle = -35f;
-        [SerializeField] private float maximumDetectionAngle = 35f;
+        public float minimumDetectionAngle = -35f;
+        public float maximumDetectionAngle = 35f;
 
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)
         {
@@ -72,23 +72,6 @@ namespace DKC
                 return; // Do not pivot if performing an action
             }
 
-            if (viewableAngle >= 61 && viewableAngle <= 110)
-            {
-                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Zombie_Turn_Right90", true);
-            }
-            else if (viewableAngle <= -61 && viewableAngle >= -110)
-            {
-                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Zombie_Turn_Left90", true);
-            }
-
-            if (viewableAngle >= 146 && viewableAngle <= 180)
-            {
-                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Zombie_Turn_180", true);
-            }
-            else if (viewableAngle <= -146 && viewableAngle >= -180)
-            {
-                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Zombie_Turn_180", true);
-            }
         }
     }
 }

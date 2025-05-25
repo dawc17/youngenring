@@ -40,7 +40,8 @@ namespace DKC
         {
             base.FixedUpdate();
 
-            ProcessStateMachine();
+            if (IsOwner)
+                ProcessStateMachine();
         }
 
         private void ProcessStateMachine()
