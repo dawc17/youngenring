@@ -165,6 +165,8 @@ namespace DKC
             HandlePlayerMovementInput();
             HandleDodgeInput();
             HandleSprintInput();
+            HandleSwitchLeftWeaponInput();
+            HandleSwitchRightWeaponInput();
             HandleJumpInput();
             HandleLockOnInput();
             HandleLockOnSwitchTargetInput();
@@ -339,6 +341,28 @@ namespace DKC
                 player.playerLocomotionManager.AttemptToPerformJump();
             }
         }
+
+        private void HandleSwitchRightWeaponInput()
+        {
+            if (switchRightWeaponInput)
+            {
+                switchRightWeaponInput = false;
+
+                player.playerEquipmentManager.SwitchRightWeapon();
+            }
+        }
+
+        private void HandleSwitchLeftWeaponInput()
+        {
+            if (switchLeftWeaponInput)
+            {
+                switchLeftWeaponInput = false;
+
+                player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        // attacks
 
         private void HandleRBInput()
         {

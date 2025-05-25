@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unarmed
   m_EditorClassIdentifier: 
   itemName: Unarmed
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 9a01fc3fba9b60b47a802ef190810f3b, type: 3}
   itemDescription: Your bare hands. Weak, useless and hurt if you punch too hard.
   itemID: 0
   weaponModel: {fileID: 6652906630964353354, guid: 6dc71a3eca181234da177201c530bb28, type: 3}
@@ -27,4 +27,11 @@ MonoBehaviour:
   lightningDamage: 0
   holyDamage: 0
   poiseDamage: 10
+  lightAttack01Modifier: 1.1
+  heavyAttack01Modifier: 1.4
+  chargedAttack01Modifier: 2
   baseStaminaCost: 5
+  lightAttackStaminaCostModifier: 0.9
+  heavyAttackStaminaCostModifier: 1.2
+  oh_rbAction: {fileID: 0}
+  oh_rtAction: {fileID: 0}

@@ -61,7 +61,7 @@ namespace DKC
             if (!player.IsOwner)
                 return;
 
-            player.playerAnimationManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false, true, true, true);
+            player.playerAnimationManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false, false, true, true);
 
             WeaponItem selectedWeapon = null;
 
@@ -160,7 +160,7 @@ namespace DKC
             if (!player.IsOwner)
                 return;
 
-            player.playerAnimationManager.PlayTargetActionAnimation("Swap_Left_Weapon_01", false, true, true, true);
+            player.playerAnimationManager.PlayTargetActionAnimation("Swap_Left_Weapon_01", false, false, true, true);
 
             WeaponItem selectedWeapon = null;
 

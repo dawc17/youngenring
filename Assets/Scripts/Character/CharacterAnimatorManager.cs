@@ -139,7 +139,7 @@ namespace DKC
             bool canRotate = false,
             bool canMove = false)
         {
-            Debug.Log($"Playing Target Action Animation: {targetAnimation}");
+            //Debug.Log($"Playing Target Action Animation: {targetAnimation}");
             character.animator.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
 

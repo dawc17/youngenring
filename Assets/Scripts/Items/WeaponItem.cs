@@ -38,6 +38,7 @@ namespace DKC
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
         public float lightAttackStaminaCostModifier = 0.9f;
+        public float heavyAttackStaminaCostModifier = 1.2f;
         // running attack stamina cost modifier
         // heavy attack stamina cost modifier
 
