@@ -2992,13 +2992,13 @@ GameObject:
   - component: {fileID: 6884402482232229107}
   - component: {fileID: 799596906184804465}
   - component: {fileID: 6475775594750955323}
+  - component: {fileID: 967685851307763538}
   - component: {fileID: 3240674015192800310}
   - component: {fileID: 8721413119410641035}
   - component: {fileID: 5477913717174277722}
   - component: {fileID: 1920060723234803089}
   - component: {fileID: 7807500224186302593}
   - component: {fileID: 4004967114231048377}
-  - component: {fileID: 2785284317416218953}
   - component: {fileID: 8181495913423844487}
   - component: {fileID: 1027377600892098516}
   - component: {fileID: 3669235139003343677}
@@ -3065,7 +3065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2166316522
+  GlobalObjectIdHash: 3363693262
   InScenePlacedSourceGlobalObjectIdHash: 41805025
   DeferredDespawnTick: 0
   Ownership: 1
@@ -3227,6 +3227,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &967685851307763538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7872978200527161011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f525e4469496042b2cf9a6a533c394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  isDead:
+    m_InternalValue: 0
+  characterController: {fileID: 0}
+  animator: {fileID: 0}
+  characterNetworkManager: {fileID: 0}
+  characterEffectsManager: {fileID: 0}
+  characterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
+  characterSFXManager: {fileID: 0}
+  characterLocomotionManager: {fileID: 0}
+  isPerformingAction: 0
+  isGrounded: 1
+  applyRootMotion: 0
+  canRotate: 1
+  canMove: 1
 --- !u!114 &3240674015192800310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3264,6 +3292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81b52928084e65419afe9d43a9db7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  lastAttackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 7708091327917222177}
@@ -3319,38 +3349,12 @@ MonoBehaviour:
   gravityForce: -9.81
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   groundCheckSphereRadius: 0.3
   yVelocity: {x: 0, y: 0, z: 0}
-  groundedYVelocity: -2
-  fallStartYVelocity: -5
---- !u!114 &2785284317416218953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7872978200527161011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 745796da1592a4091b79dfa8c1bec847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  isDead:
-    m_InternalValue: 0
-  characterController: {fileID: 0}
-  animator: {fileID: 0}
-  characterNetworkManager: {fileID: 0}
-  characterEffectsManager: {fileID: 0}
-  characterAnimatorManager: {fileID: 0}
-  characterCombatManager: {fileID: 0}
-  characterSFXManager: {fileID: 0}
-  isPerformingAction: 0
-  isGrounded: 1
-  applyRootMotion: 0
-  canRotate: 1
-  canMove: 1
+  groundedYVelocity: 0
+  fallStartYVelocity: 0
+  isRolling: 0
 --- !u!114 &8181495913423844487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3377,11 +3381,15 @@ MonoBehaviour:
     m_InternalValue: 0
   networkMoveAmount:
     m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
     m_InternalValue: 0
   isLockedOn:
+    m_InternalValue: 0
+  isChargingAttack:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 0
