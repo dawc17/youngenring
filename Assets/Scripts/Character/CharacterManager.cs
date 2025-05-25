@@ -21,6 +21,9 @@ namespace DKC
         [HideInInspector] public CharacterSFXManager characterSFXManager;
         [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
 
+        [Header("Character Group")]
+        public CharacterGroup characterGroup;
+
         [Header("Flags")]
         public bool isPerformingAction = false;
         public bool isGrounded = true;
@@ -85,6 +88,11 @@ namespace DKC
                         characterNetworkManager.networkRotation.Value,
                         characterNetworkManager.networkRotationSmoothTime);
             }
+        }
+
+        protected virtual void FixedUpdate()
+        {
+
         }
 
         protected virtual void LateUpdate()

@@ -35,5 +35,35 @@ namespace DKC
         {
             return environmentLayers;
         }
+
+        public bool CanIDamageThisTarget(CharacterGroup attackingCharacter, CharacterGroup targetCharacter)
+        {
+            if (attackingCharacter == CharacterGroup.Team01)
+            {
+                switch (targetCharacter)
+                {
+                    case CharacterGroup.Team01:
+                        return false; // Cannot damage own team
+                    case CharacterGroup.Team02:
+                        return true; // Can damage enemy team
+                    default:
+                        break;
+                }
+            }
+            else if (attackingCharacter == CharacterGroup.Team02)
+            {
+                switch (targetCharacter)
+                {
+                    case CharacterGroup.Team01:
+                        return true;
+                    case CharacterGroup.Team02:
+                        return false;
+                    default:
+                        break;
+                }
+            }
+
+            return false; // Default case, cannot damage unknown targets
+        }
     }
 }

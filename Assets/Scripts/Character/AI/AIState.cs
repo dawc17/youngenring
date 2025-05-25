@@ -6,7 +6,6 @@ namespace DKC
     {
         public virtual AIState Tick(AICharacterManager aiCharacter)
         {
-            Debug.Log("we are running this state");
             return this;
         }
     }
