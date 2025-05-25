@@ -3072,7 +3072,7 @@ Transform:
   m_GameObject: {fileID: 7872978200527161011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.193985, y: 0, z: 1.6241913}
+  m_LocalPosition: {x: -6.81, y: -0.00000047683716, z: 0.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3312,7 +3312,10 @@ MonoBehaviour:
   canRotate: 1
   canMove: 1
   aiCharacterCombatManager: {fileID: 0}
+  navMeshAgent: {fileID: 0}
   currentState: {fileID: 11400000, guid: 64926603be792aa4eb5afab6d1797caa, type: 2}
+  idleState: {fileID: 11400000, guid: 64926603be792aa4eb5afab6d1797caa, type: 2}
+  pursueTargetState: {fileID: 11400000, guid: a8625aa591c3db545a8776a963348585, type: 2}
 --- !u!114 &-5782129203083886740
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,14 +9,11 @@ namespace DKC
         {
             if (aiCharacter.characterCombatManager.currentTarget != null)
             {
-                Debug.Log("Found a target, commencing fentanyl extraction procedure.");
-
-                return this;
+                return SwitchState(aiCharacter, aiCharacter.pursueTargetState);
             }
             else
             {
                 aiCharacter.aiCharacterCombatManager.FindATargetViaLineOfSight(aiCharacter);
-                Debug.Log("Looking for a target...");
                 return this;
             }
         }
