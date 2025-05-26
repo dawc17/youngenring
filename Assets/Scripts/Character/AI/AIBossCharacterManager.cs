@@ -23,6 +23,9 @@ namespace DKC
         // if it is defeated, do not spawn the boss
         // if the boss has not been defeated, spawn the boss
 
+        [Header("Audio")]
+        [SerializeField] AudioClip bossLoopAudioClip;
+
         [Header("States")]
         [SerializeField] BossSleepState sleepState;
 
@@ -194,10 +197,16 @@ namespace DKC
         {
             if (bossFightIsActive.Value)
             {
+                WorldSFXManager.instance.PlayBossLoop(bossLoopAudioClip);
+
                 GameObject bossHealthBar = Instantiate(PlayerUIManager.instance.playerUIHudManager.bossHPBarObject, PlayerUIManager.instance.playerUIHudManager.bossHPBarParent);
 
                 UI_StatBossHP bossHpBar = bossHealthBar.GetComponentInChildren<UI_StatBossHP>();
                 bossHpBar.EnableBossHPBar(this);
+            }
+            else
+            {
+                WorldSFXManager.instance.StopBossMusic();
             }
         }
     }

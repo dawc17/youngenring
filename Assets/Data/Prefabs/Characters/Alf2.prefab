@@ -821,6 +821,7 @@ MonoBehaviour:
   fogWalls: []
   sleepAnimation: Sleep_01
   awakenAnimation: Awaken_01
+  bossLoopAudioClip: {fileID: 8300000, guid: 6cc6b766126752f4bb0bec1ae8b5242e, type: 3}
   sleepState: {fileID: 11400000, guid: 4e432575c9e16ad4d915442bfa1bc643, type: 2}
 --- !u!114 &2786210936682380020
 MonoBehaviour:
