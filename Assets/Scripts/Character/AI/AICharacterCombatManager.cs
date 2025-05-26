@@ -4,7 +4,8 @@ namespace DKC
 {
     public class AICharacterCombatManager : CharacterCombatManager
     {
-        [Header("Viewable Angle")]
+        [Header("Target Information")]
+        public float distanceFromTarget;
         public float viewableAngle;
         public Vector3 directionOfTarget;
 

@@ -60,6 +60,7 @@ namespace DKC
             {
                 aiCharacterCombatManager.directionOfTarget = aiCharacterCombatManager.currentTarget.transform.position - transform.position;
                 aiCharacterCombatManager.viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, aiCharacterCombatManager.directionOfTarget);
+                aiCharacterCombatManager.distanceFromTarget = Vector3.Distance(transform.position, aiCharacterCombatManager.currentTarget.transform.position);
             }
 
             if (navMeshAgent.enabled)

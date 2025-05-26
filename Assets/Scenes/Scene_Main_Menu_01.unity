@@ -4858,6 +4858,10 @@ PrefabInstance:
       propertyPath: collideWithLayers.m_Bits
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3948744919998560328, guid: 13c43b861327d1415951d4697749b02c, type: 3}
+      propertyPath: field of view
+      value: 179
+      objectReference: {fileID: 0}
     - target: {fileID: 4846027600887025410, guid: 13c43b861327d1415951d4697749b02c, type: 3}
       propertyPath: m_Name
       value: Player Camera LeftRight
@@ -4996,6 +5000,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1112311432122504708, guid: 6225fbf3a70d9624689b42b6358cc931, type: 3}
+      propertyPath: weapons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1112311432122504708, guid: 6225fbf3a70d9624689b42b6358cc931, type: 3}
+      propertyPath: 'weapons.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e9d25bbb2339ac3458493947243bc9f2, type: 2}
     - target: {fileID: 1693707704904123782, guid: 6225fbf3a70d9624689b42b6358cc931, type: 3}
       propertyPath: m_Name
       value: World Item Database

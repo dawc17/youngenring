@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398a1e9f940e00c4885fcdf522b7aec6, type: 3}
+  m_Name: Scythe
+  m_EditorClassIdentifier: 
+  itemName: Scythe
+  itemIcon: {fileID: 21300002, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+  itemDescription: A big ass scythe.
+  itemID: 3
+  weaponModel: {fileID: 4221556704598808486, guid: f471f70a234ca7b42b6acda13b83bcd1, type: 3}
+  strengthReq: 15
+  dexterityReq: 15
+  intelligenceReq: 0
+  faithReq: 0
+  physicalDamage: 170
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  poiseDamage: 10
+  lightAttack01Modifier: 1
+  lightAttack02Modifier: 1.2
+  heavyAttack01Modifier: 1.4
+  heavyAttack02Modifier: 1.6
+  chargedAttack01Modifier: 2
+  chargedAttack02Modifier: 2.3
+  baseStaminaCost: 30
+  lightAttackStaminaCostModifier: 0.9
+  heavyAttackStaminaCostModifier: 1.2
+  oh_rbAction: {fileID: 11400000, guid: 237cb2dfd4109d24da20c0900af2f3c8, type: 2}
+  oh_rtAction: {fileID: 11400000, guid: 6e1b2768f2d290e4597ef252ae124692, type: 2}
