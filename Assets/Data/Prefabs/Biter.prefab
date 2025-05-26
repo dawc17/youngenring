@@ -883,7 +883,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ccae2dc6cf6f0c4479b782fedd0c8172, type: 2}
+  - {fileID: 2100000, guid: 5abb3d18170c7cc4b8ce3577ef8b5ed8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -908,7 +908,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300006, guid: 897b34267f422c1499700402763d096e, type: 3}
+  m_Mesh: {fileID: 4300026, guid: d288a0e4a2d923b46898986e979da643, type: 3}
   m_Bones:
   - {fileID: 1003151175796793430}
   - {fileID: 6140109163788170912}
@@ -3459,6 +3459,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e785d89ef56fc4f49af9d0910a1b6973, type: 3}
   - {fileID: 8300000, guid: 1f596aea712627447bd93b789d6e25f5, type: 3}
   - {fileID: 8300000, guid: c97c6a02548fd5e4ba7b335575162e5f, type: 3}
+  rollSounds: []
 --- !u!114 &3669235139003343677
 MonoBehaviour:
   m_ObjectHideFlags: 0

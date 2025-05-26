@@ -19,6 +19,9 @@ namespace DKC
 
         [Header("Flags")]
         public bool isRolling = false;
+        public bool canRotate = true;
+        public bool canMove = true;
+        public bool isGrounded = true;
 
         protected virtual void Awake()
         {
@@ -33,7 +36,7 @@ namespace DKC
 
             HandleGroundCheck();
 
-            if (character.isGrounded)
+            if (isGrounded)
             {
                 if (yVelocity.y < 0)
                 {
@@ -61,7 +64,7 @@ namespace DKC
 
         protected void HandleGroundCheck()
         {
-            character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
+            isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
         }
 
         //protected void OnDrawGizmosSelected()
@@ -71,12 +74,12 @@ namespace DKC
 
         public void EnableCanRotate()
         {
-            character.canRotate = true;
+            canRotate = true;
         }
 
         public void DisableCanRotate()
         {
-            character.canRotate = false;
+            canRotate = false;
         }
     }
 }

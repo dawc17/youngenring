@@ -16,7 +16,7 @@ namespace DKC
 
         private void OnAnimatorMove()
         {
-            if (player.IsOwner && player.applyRootMotion)
+            if (player.IsOwner && applyRootMotion)
             {
                 Vector3 velocity = player.animator.deltaPosition;
                 player.characterController.Move(velocity);
@@ -27,14 +27,14 @@ namespace DKC
         public void PlayRollAnimation()
         {
             // Set root motion to true before starting animation
-            player.applyRootMotion = true;
+            applyRootMotion = true;
             PlayTargetActionAnimation("Roll_Forward_01", true, true, false, false);
             player.playerLocomotionManager.isRolling = true;
         }
 
         public void PlayBackstepAnimation()
         {
-            player.applyRootMotion = true;
+            applyRootMotion = true;
             PlayTargetActionAnimation("Backstep_01", true, true, false, false);
         }
 

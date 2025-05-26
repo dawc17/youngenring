@@ -661,7 +661,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageCollider: {fileID: 2079775695800335278}
-  hitboxTrail: {fileID: 4496179723435637082}
   physicalDamage: 0
   magicDamage: 0
   fireDamage: 0

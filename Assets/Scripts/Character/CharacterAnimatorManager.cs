@@ -14,6 +14,9 @@ namespace DKC
         [Header("Damage Animations")]
         public string lastDamageAnimationPlayed;
 
+        [Header("Flags")]
+        public bool applyRootMotion = false;
+
         [SerializeField] string hit_ForwardMedium01 = "hit_ForwardMedium01";
         [SerializeField] string hit_ForwardMedium02 = "hit_ForwardMedium02";
         [SerializeField] string hit_BackwardMedium01 = "hit_BackwardMedium01";
@@ -148,8 +151,8 @@ namespace DKC
             // turn true if stunned
             // basically allows and stops actions
             character.isPerformingAction = isPerformingAction;
-            character.canMove = canMove;
-            character.canRotate = canRotate;
+            character.characterLocomotionManager.canMove = canMove;
+            character.characterLocomotionManager.canRotate = canRotate;
 
             character.characterNetworkManager.NotifyServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
@@ -169,12 +172,12 @@ namespace DKC
             // tell the netwok manager if we are in an attacking flag (counter damage)
             character.characterCombatManager.currentAttackType = attackType;
             character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
-            character.applyRootMotion = applyRootMotion;
+            character.characterAnimatorManager.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
 
             character.isPerformingAction = isPerformingAction;
-            character.canMove = canMove;
-            character.canRotate = canRotate;
+            character.characterLocomotionManager.canMove = canMove;
+            character.characterLocomotionManager.canRotate = canRotate;
 
             character.characterNetworkManager.NotifyServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }

@@ -106,7 +106,7 @@ namespace DKC
                 return; // No target to rotate towards
             }
 
-            if (!aiCharacter.canRotate)
+            if (!aiCharacter.characterLocomotionManager.canRotate)
             {
                 return; // Cannot rotate if the character is not allowed to rotate
             }

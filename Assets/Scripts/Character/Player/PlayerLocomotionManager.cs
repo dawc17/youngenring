@@ -89,7 +89,7 @@ namespace DKC
 
         private void HandleGroundedMovement()
         {
-            if (!player.canMove)
+            if (!canMove)
                 return;
 
             GetMovementValues();
@@ -127,7 +127,7 @@ namespace DKC
 
         private void HandleFreeFallMovement()
         {
-            if (!player.isGrounded)
+            if (!isGrounded)
             {
                 Vector3 freeFallDirection;
 
@@ -144,7 +144,7 @@ namespace DKC
             if (player.isDead.Value)
                 return;
 
-            if (!player.canRotate)
+            if (!canRotate)
                 return;
 
             if (player.playerNetworkManager.isLockedOn.Value)
@@ -276,7 +276,7 @@ namespace DKC
                 return;
 
             // if we are in the air, return!!!
-            if (!player.isGrounded)
+            if (!isGrounded)
                 return;
 
             // lose stamina
