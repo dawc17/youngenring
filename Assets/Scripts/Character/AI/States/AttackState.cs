@@ -28,7 +28,7 @@ namespace DKC
                 return SwitchState(aiCharacter, aiCharacter.idleState);
             }
 
-            // rotate towards target whilst attacking
+            aiCharacter.aiCharacterCombatManager.RotateTowardsTargetWhileAttacking(aiCharacter);
 
             aiCharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
 
@@ -42,12 +42,12 @@ namespace DKC
                 }
             }
 
+            if (aiCharacter.isPerformingAction)
+                return this;
+
             if (!hasPerformedAttack)
             {
                 if (aiCharacter.aiCharacterCombatManager.actionRecoveryTimer > 0)
-                    return this;
-
-                if (aiCharacter.isPerformingAction)
                     return this;
 
                 PerformAttack(aiCharacter);

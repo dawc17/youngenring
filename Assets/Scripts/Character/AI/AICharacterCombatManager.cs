@@ -20,6 +20,13 @@ namespace DKC
         [Header("Attack Rotation Speed")]
         public float attackRotationSpeed = 25f;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
+        }
+
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)
         {
             if (currentTarget != null)

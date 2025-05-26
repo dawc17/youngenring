@@ -8,7 +8,6 @@ namespace DKC
     {
         [Header("Collider")]
         [SerializeField] protected Collider damageCollider;
-        [SerializeField] protected GameObject hitboxTrail;
 
         [Header("Damage")]
         public float physicalDamage = 0;
@@ -72,13 +71,11 @@ namespace DKC
         public virtual void EnableDamageCollider()
         {
             damageCollider.enabled = true;
-            hitboxTrail.SetActive(true);
         }
 
         public virtual void DisableDamageCollider()
         {
             damageCollider.enabled = false;
-            hitboxTrail.SetActive(false);
             charactersDamaged.Clear(); // we reset the characters that got hit when we reset the collider so we can damage them again
         }
     }
