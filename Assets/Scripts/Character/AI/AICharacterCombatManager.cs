@@ -4,6 +4,8 @@ namespace DKC
 {
     public class AICharacterCombatManager : CharacterCombatManager
     {
+        protected AICharacterManager aiCharacter;
+
         [Header("Action Recovery")]
         public float actionRecoveryTimer = 0f;
 
@@ -24,6 +26,7 @@ namespace DKC
         {
             base.Awake();
 
+            aiCharacter = GetComponent<AICharacterManager>();
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
         }
 

@@ -103,6 +103,7 @@ namespace DKC
             AudioClip physicalDamageSFX = WorldSFXManager.instance.ChooseRandomSFXFromArray(WorldSFXManager.instance.physicalDamageSFX);
 
             character.characterSFXManager.PlaySFX(physicalDamageSFX);
+            character.characterSFXManager.PlayDamageGrunt();
         }
 
         private void PlayDirectionalBasedDamageAnimation(CharacterManager character)

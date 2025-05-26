@@ -7,6 +7,15 @@ namespace DKC
     {
         private AudioSource audioSource;
 
+        [Header("Damage Grunts")]
+        [SerializeField] protected AudioClip[] damageGrunts;
+
+        [Header("Attack Grunts")]
+        [SerializeField] protected AudioClip[] attackGrunts;
+
+        [Header("Roll SFX")]
+        [SerializeField] protected AudioClip[] rollSounds;
+
         protected void Awake()
         {
             audioSource = GetComponent<AudioSource>();
@@ -24,9 +33,19 @@ namespace DKC
             }
         }
 
-        public void PlayRollSFX()
+        public virtual void PlayDamageGrunt()
         {
-            audioSource.PlayOneShot(WorldSFXManager.instance.rollSFX);
+            PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(damageGrunts));
+        }
+
+        public virtual void PlayAttackGrunt()
+        {
+            PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(attackGrunts));
+        }
+
+        public virtual void PlayRollSFX()
+        {
+            PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(rollSounds));
         }
     }
 }

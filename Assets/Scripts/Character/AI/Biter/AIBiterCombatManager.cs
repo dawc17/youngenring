@@ -27,6 +27,7 @@ namespace DKC
 
         public void OpenRightHandDamageCollider()
         {
+            aiCharacter.characterSFXManager.PlayAttackGrunt();
             rightHandDamageCollider.EnableDamageCollider();
         }
 
@@ -37,6 +38,7 @@ namespace DKC
 
         public void OpenLeftHandDamageCollider()
         {
+            aiCharacter.characterSFXManager.PlayAttackGrunt();
             leftHandDamageCollider.EnableDamageCollider();
         }
 

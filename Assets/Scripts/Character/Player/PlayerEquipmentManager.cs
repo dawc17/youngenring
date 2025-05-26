@@ -256,14 +256,15 @@ namespace DKC
             if (player.playerNetworkManager.isUsingRightHand.Value)
             {
                 rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
+                player.characterSFXManager.PlayAttackGrunt();
+
             }
             // open left weapon collider
             else if (player.playerNetworkManager.isUsingLeftHand.Value)
             {
                 leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
+                player.characterSFXManager.PlayAttackGrunt();
             }
-
-            // play sfx
         }
 
         public void CloseDamageCollider()

@@ -5112,7 +5112,7 @@ PrefabInstance:
     - target: {fileID: 8743484700878440675, guid: 129335436ead25d2694a3a51450199cc, type: 3}
       propertyPath: rollSFX
       value: 
-      objectReference: {fileID: 8300000, guid: fa4a4f2dd5c65e720a632a84e13ec8c4, type: 3}
+      objectReference: {fileID: 8300000, guid: 8df7d23a665dd9f49803b48959f50342, type: 3}
     - target: {fileID: 8743484700878440675, guid: 129335436ead25d2694a3a51450199cc, type: 3}
       propertyPath: physicalDamageSFX.Array.size
       value: 2

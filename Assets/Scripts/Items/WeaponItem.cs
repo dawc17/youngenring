@@ -52,5 +52,7 @@ namespace DKC
         // ash of war
 
         // blocking sounds
+        [Header("Grunts")]
+        public AudioClip[] attackGrunts;
     }
 }

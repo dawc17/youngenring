@@ -3636,6 +3636,7 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   characterSFXManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
+  characterGroup: 0
   isPerformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -3664,10 +3665,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  lastAttackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 8857966107702845834}
   currentWeaponBeingUsed: {fileID: 0}
+  canComboWithMainHandWeapon: 0
 --- !u!114 &5101922324819833685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3693,6 +3696,8 @@ MonoBehaviour:
   animatorVerticalParameter:
     m_InternalValue: 0
   networkMoveAmount:
+    m_InternalValue: 0
+  isMoving:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
     m_InternalValue: 0
@@ -3938,6 +3943,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e35402b981f114b7ca37f63fdd9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageGrunts:
+  - {fileID: 8300000, guid: 0c6cf71a12249944a874ffc8cdcf9923, type: 3}
+  - {fileID: 8300000, guid: 8db3abec2534a964ebbdf0a34ba6e727, type: 3}
+  - {fileID: 8300000, guid: 9dda96d3831658746b6ac35ecec114be, type: 3}
+  - {fileID: 8300000, guid: 89d48f7deeef76a47ad9b3aff576a2f8, type: 3}
+  - {fileID: 8300000, guid: d0c9ca0aad73e034c9fc1c29938e3007, type: 3}
+  attackGrunts:
+  - {fileID: 8300000, guid: e4b48b6a73f0b2e4fbf50f5c6038ba6c, type: 3}
+  - {fileID: 8300000, guid: 69bf3ee3706c55045ab34b2ed0fed272, type: 3}
+  - {fileID: 8300000, guid: 497fbc28d521dcb449077a31c20e91b3, type: 3}
+  - {fileID: 8300000, guid: 05d9459907936dc4e880296e7e1438ab, type: 3}
+  - {fileID: 8300000, guid: 2d6a4b151401b1547880437496bd258d, type: 3}
+  - {fileID: 8300000, guid: 861da128ad4af3744aca8928143b03f7, type: 3}
+  rollSounds:
+  - {fileID: 8300000, guid: 8df7d23a665dd9f49803b48959f50342, type: 3}
+  - {fileID: 8300000, guid: 93ea6d2c984a566479e949c24800a299, type: 3}
 --- !u!54 &6194903210592550615
 Rigidbody:
   m_ObjectHideFlags: 0

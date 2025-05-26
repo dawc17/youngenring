@@ -1212,7 +1212,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageCollider: {fileID: 2924086505683844360}
-  hitboxTrail: {fileID: 0}
   physicalDamage: 0
   magicDamage: 0
   fireDamage: 0
@@ -3451,6 +3450,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d94fe27f57f64282b46d3d29d522e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageGrunts:
+  - {fileID: 8300000, guid: 43924ce171c7da94c8fe9206fe5c967d, type: 3}
+  - {fileID: 8300000, guid: fa4826f75a7386e4ab0a0f4d51054c81, type: 3}
+  - {fileID: 8300000, guid: 8dde39c5830a7874aa92729b674923eb, type: 3}
+  attackGrunts:
+  - {fileID: 8300000, guid: 73ec236986c48c84dbec534c6e22d07b, type: 3}
+  - {fileID: 8300000, guid: e785d89ef56fc4f49af9d0910a1b6973, type: 3}
+  - {fileID: 8300000, guid: 1f596aea712627447bd93b789d6e25f5, type: 3}
+  - {fileID: 8300000, guid: c97c6a02548fd5e4ba7b335575162e5f, type: 3}
 --- !u!114 &3669235139003343677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3670,7 +3678,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageCollider: {fileID: 189680024970820804}
-  hitboxTrail: {fileID: 0}
   physicalDamage: 0
   magicDamage: 0
   fireDamage: 0

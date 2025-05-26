@@ -28,7 +28,17 @@ MonoBehaviour:
   holyDamage: 0
   poiseDamage: 25
   lightAttack01Modifier: 1.1
+  lightAttack02Modifier: 1.2
+  heavyAttack01Modifier: 1.4
+  heavyAttack02Modifier: 1.6
+  chargedAttack01Modifier: 2
+  chargedAttack02Modifier: 2.3
   baseStaminaCost: 20
   lightAttackStaminaCostModifier: 0.9
+  heavyAttackStaminaCostModifier: 1.2
   oh_rbAction: {fileID: 11400000, guid: 237cb2dfd4109d24da20c0900af2f3c8, type: 2}
   oh_rtAction: {fileID: 11400000, guid: 6e1b2768f2d290e4597ef252ae124692, type: 2}
+  attackGrunts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
