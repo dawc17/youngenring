@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae24afc3359743e4c91abc8730b284c9, type: 3}
-  m_Name: Idle State
+  m_Script: {fileID: 11500000, guid: 6969278b527571e498e17a3f4c1d373c, type: 3}
+  m_Name: Alf_Pursue Target State
   m_EditorClassIdentifier: 

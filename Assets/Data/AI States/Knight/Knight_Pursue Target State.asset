@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6969278b527571e498e17a3f4c1d373c, type: 3}
-  m_Name: Pursue Target State
+  m_Name: Knight_Pursue Target State
   m_EditorClassIdentifier: 

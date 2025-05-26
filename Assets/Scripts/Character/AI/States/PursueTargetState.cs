@@ -6,6 +6,7 @@ namespace DKC
     [CreateAssetMenu(menuName = "AI/States/Pursue Target")]
     public class PursueTargetState : AIState
     {
+        [SerializeField] protected bool enablePivot = true;
         public override AIState Tick(AICharacterManager aiCharacter)
         {
             // check if we are performing an action (if so do nothing until action is complete)
@@ -27,6 +28,7 @@ namespace DKC
             }
 
             // if our target is outside the characters foc pivot to face them
+
             if (aiCharacter.aiCharacterCombatManager.viewableAngle < aiCharacter.aiCharacterCombatManager.minimumDetectionAngle || aiCharacter.aiCharacterCombatManager.viewableAngle > aiCharacter.aiCharacterCombatManager.maximumDetectionAngle)
             {
                 aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);

@@ -250,7 +250,6 @@ namespace DKC
                 player.transform.rotation = playerRotation;
 
                 player.playerAnimationManager.PlayRollAnimation();
-                player.characterSFXManager.PlayRollSFX();
                 player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
             }
             // if stationary:

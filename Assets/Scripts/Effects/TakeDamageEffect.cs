@@ -43,13 +43,18 @@ namespace DKC
 
         public override void ProcessEffect(CharacterManager character)
         {
+            if (character.characterNetworkManager.isInvulnerable.Value)
+            {
+                // if character is invulnerable, do not process damage
+                Debug.Log("Character is invulnerable, not processing damage.");
+                return;
+            }
+
             base.ProcessEffect(character);
 
             // dont process anything if character is dead
             if (character.isDead.Value)
                 return;
-
-            // check for iFrames
 
             CalculateDamage(character);
             // check which direction damage came from

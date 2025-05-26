@@ -45,6 +45,7 @@ namespace DKC
 
         public virtual void PlayRollSFX()
         {
+            Debug.Log("Playing roll sound");
             PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(rollSounds));
         }
     }

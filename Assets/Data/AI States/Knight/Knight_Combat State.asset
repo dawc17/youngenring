@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa4abbb527b74d840b01e0caeb939531, type: 3}
+  m_Name: Knight_Combat State
+  m_EditorClassIdentifier: 
+  aiCharacterAttacks:
+  - {fileID: 11400000, guid: 731eefdd309b21f48a5bf9cc4fc4869f, type: 2}
+  - {fileID: 11400000, guid: a764b5e0c89955941989f47465249232, type: 2}
+  potentialAttacks: []
+  selectedAttack: {fileID: 0}
+  previousAttack: {fileID: 0}
+  canPerformCombo: 0
+  chanceToPerformCombo: 25
+  hasRolledForComboChance: 0
+  enablePivot: 0
+  maximumEngagementDistance: 5

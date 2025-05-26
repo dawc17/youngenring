@@ -13,6 +13,7 @@ namespace DKC
         public float distanceFromTarget;
         public float viewableAngle;
         public Vector3 directionOfTarget;
+        public bool enablePivot = true;
 
         [Header("Detection")]
         [SerializeField] private float detectionRadius = 15f;
@@ -75,19 +76,58 @@ namespace DKC
                             viewableAngle = WorldUtilityManager.instance.GetAngleOfTarget(transform, directionOfTarget);
                             aiCharacter.characterCombatManager.SetTarget(targetCharacter);
                             Debug.Log($"Target acquired: {targetCharacter.name}");
-                            PivotTowardsTarget(aiCharacter);
+
+                            if (enablePivot)
+                            {
+                                PivotTowardsTarget(aiCharacter);
+                            }
+
                         }
                     }
                 }
             }
         }
 
-        public void PivotTowardsTarget(AICharacterManager aiCharacter)
+        public virtual void PivotTowardsTarget(AICharacterManager aiCharacter)
         {
             if (aiCharacter.isPerformingAction)
             {
                 return; // Do not pivot if performing an action
             }
+
+            if (viewableAngle >= 20 && viewableAngle <= 60)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_45", true);
+            }
+            else if (viewableAngle <= -20 && viewableAngle >= -60)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_45", true);
+            }
+            else if (viewableAngle >= 61 && viewableAngle <= 110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_90", true);
+            }
+            else if (viewableAngle <= -61 && viewableAngle >= -110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_90", true);
+            }
+            if (viewableAngle >= 110 && viewableAngle <= 145)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_135", true);
+            }
+            else if (viewableAngle <= -110 && viewableAngle >= -145)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_135", true);
+            }
+            if (viewableAngle >= 146 && viewableAngle <= 180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_180", true);
+            }
+            else if (viewableAngle <= -146 && viewableAngle >= -180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_180", true);
+            }
+
 
         }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,15 +15,18 @@ namespace DKC
 
         [Header("Attacks")]
         public List<AICharacterAttackAction> aiCharacterAttacks; // list of all attacks this character can do
-        protected List<AICharacterAttackAction> potentialAttacks; // all attacks possible in current situation
-        private AICharacterAttackAction selectedAttack; // the attack that will be performed
-        private AICharacterAttackAction previousAttack; // the last attack that was performed, used for combos
+        [SerializeField] protected List<AICharacterAttackAction> potentialAttacks; // all attacks possible in current situation
+        [SerializeField] private AICharacterAttackAction selectedAttack; // the attack that will be performed
+        [SerializeField] private AICharacterAttackAction previousAttack; // the last attack that was performed, used for combos
         protected bool hasAttack = false; // if we have selected an attack to perform
 
         [Header("Combo")]
         [SerializeField] protected bool canPerformCombo = false;
         [SerializeField] protected int chanceToPerformCombo = 25; // the chance (in percent) of the character to perform a combo on the next attack
         [SerializeField] protected bool hasRolledForComboChance = false;
+
+        [Header("Pivot")]
+        [SerializeField] protected bool enablePivot; // if the character can pivot towards the target
 
         [Header("Engagement Distance")]
         [SerializeField] public float maximumEngagementDistance = 5; // the distance we have to be away from the target before we enter the pursue target state

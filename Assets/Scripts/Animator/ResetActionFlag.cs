@@ -24,6 +24,7 @@ namespace DKC
             if (character.IsOwner)
             {
                 character.characterNetworkManager.isJumping.Value = false;
+                character.characterNetworkManager.isInvulnerable.Value = false;
             }
 
         }
