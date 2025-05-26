@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace DKC
 {
+    [CreateAssetMenu(menuName = "AI/States/Combat State")]
     public class CombatState : AIState
     {
         // 1. select an attack for the attack state depending on angle, distance and weight of attack
@@ -15,6 +17,7 @@ namespace DKC
         protected List<AICharacterAttackAction> potentialAttacks; // all attacks possible in current situation
         private AICharacterAttackAction selectedAttack; // the attack that will be performed
         private AICharacterAttackAction previousAttack; // the last attack that was performed, used for combos
+        protected bool hasAttack = false; // if we have selected an attack to perform
 
         [Header("Combo")]
         [SerializeField] protected bool canPerformCombo = false;
@@ -26,7 +29,45 @@ namespace DKC
 
         public override AIState Tick(AICharacterManager aiCharacter)
         {
-            return base.Tick(aiCharacter);
+            if (aiCharacter.isPerformingAction)
+                return this; // if we are performing an action, stay in combat state
+
+            if (!aiCharacter.navMeshAgent.enabled)
+                aiCharacter.navMeshAgent.enabled = true; // enable navmesh agent if it is disabled
+
+            if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+            {
+                if (aiCharacter.aiCharacterCombatManager.viewableAngle < -30 || aiCharacter.aiCharacterCombatManager.viewableAngle > 30)
+                    aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+            }
+
+            if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
+            {
+                return SwitchState(aiCharacter, aiCharacter.idleState);
+            }
+
+            if (!hasAttack)
+            {
+                GetNewAttack(aiCharacter);
+            }
+            else
+            {
+                // check recovery time of the attack
+                // pass attack to the attack state
+                // roll for combo
+            }
+
+            // if out of engagement distance, switch to pursue target state
+            if (aiCharacter.aiCharacterCombatManager.distanceFromTarget > maximumEngagementDistance)
+            {
+                return SwitchState(aiCharacter, aiCharacter.pursueTargetState);
+            }
+
+            NavMeshPath path = new NavMeshPath();
+            aiCharacter.navMeshAgent.CalculatePath(aiCharacter.aiCharacterCombatManager.currentTarget.transform.position, path);
+            aiCharacter.navMeshAgent.SetPath(path);
+
+            return this; // stay in combat state
         }
 
         protected virtual void GetNewAttack(AICharacterManager aiCharacter)
@@ -71,7 +112,9 @@ namespace DKC
 
                 if (randomWeight <= processedWeight)
                 {
-
+                    selectedAttack = attack;
+                    previousAttack = selectedAttack; // store the previous attack for combo logic
+                    hasAttack = true;
                 }
             }
             // 1. sort through all possible attacks
@@ -96,6 +139,7 @@ namespace DKC
         {
             base.ResetStateFlags(aICharacter);
 
+            hasAttack = false;
             hasRolledForComboChance = false;
         }
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace DKC
 {
+    [CreateAssetMenu(menuName = "AI/Actions/Attack Action")]
     public class AICharacterAttackAction : ScriptableObject
     {
         [Header("Attack")]
