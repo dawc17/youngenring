@@ -488,6 +488,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1750c4d702bd7544fb1af0e734d5867c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6607374440945604819}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1750c4d702bd7544fb1af0e734d5867c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1301291347987430763}
     - targetCorrespondingSourceObject: {fileID: -2753057030694630212, guid: 1750c4d702bd7544fb1af0e734d5867c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5282026563973339277}
@@ -798,6 +801,7 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterGroup: 1
   isPerformingAction: 0
+  characterName: Alfeth Helgeth, Eater Of Worlds
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -808,10 +812,16 @@ MonoBehaviour:
   combatState: {fileID: 11400000, guid: ad4918f7e938ea243ae9a49848d3859d, type: 2}
   attackState: {fileID: 11400000, guid: 8e7999b9448088b4d8163aa7afa1631d, type: 2}
   bossID: 0
-  hasBeenDefeated: 0
-  hasBeenAwakened: 0
+  bossFightIsActive:
+    m_InternalValue: 0
+  hasBeenDefeated:
+    m_InternalValue: 0
+  hasBeenAwakened:
+    m_InternalValue: 0
   fogWalls: []
-  wakeBossUp: 0
+  sleepAnimation: Sleep_01
+  awakenAnimation: Awaken_01
+  sleepState: {fileID: 11400000, guid: 4e432575c9e16ad4d915442bfa1bc643, type: 2}
 --- !u!114 &2786210936682380020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,9 +873,12 @@ MonoBehaviour:
   maximumDetectionAngle: 35
   attackRotationSpeed: 25
   clubDamageCollider: {fileID: 5150751062964775508}
+  durksStompingFoot: {fileID: 7580764233517660912}
+  durksStompRadius: 0.25
   baseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1.4
+  stompDamage: 25
 --- !u!95 &-8188671699105375508
 Animator:
   serializedVersion: 7
@@ -898,6 +911,60 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932205a96b44be9409889a1dbbfa2800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  isActive:
+    m_InternalValue: 1
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotation:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
+  networkPositionVelocity: {x: 0, y: 0, z: 0}
+  networkPositionSmoothTime: 0.1
+  networkRotationSmoothTime: 0.1
+  animatorHorizontalParameter:
+    m_InternalValue: 0
+  animatorVerticalParameter:
+    m_InternalValue: 0
+  networkMoveAmount:
+    m_InternalValue: 0
+  isMoving:
+    m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+  isJumping:
+    m_InternalValue: 0
+  isLockedOn:
+    m_InternalValue: 0
+  isChargingAttack:
+    m_InternalValue: 0
+  isInvulnerable:
+    m_InternalValue: 0
+  currentStamina:
+    m_InternalValue: 0
+  maxStamina:
+    m_InternalValue: 0
+  currentHealth:
+    m_InternalValue: 0
+  maxHealth:
+    m_InternalValue: 0
+  endurance:
+    m_InternalValue: 1
+  vitality:
+    m_InternalValue: 1
+--- !u!114 &-1301291347987430763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3514035170239955133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1f3f2103ed531428bc4a4749adbdd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
@@ -999,3 +1066,8 @@ MonoBehaviour:
   lightningDamage: 0
   holyDamage: 0
   bossCharacter: {fileID: 1593927773577042679}
+--- !u!4 &7580764233517660912 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3084546381883209956, guid: 1750c4d702bd7544fb1af0e734d5867c, type: 3}
+  m_PrefabInstance: {fileID: 4324921907174243820}
+  m_PrefabAsset: {fileID: 0}

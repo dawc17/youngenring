@@ -20,8 +20,7 @@ MonoBehaviour:
     rid: 4534478771614384201
   m_OverrideGlobalSceneList: 0
   m_Scenes: []
-  m_ScriptingDefines:
-  - MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
+  m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
     - line: '| PlayerSettings:'
@@ -864,7 +863,7 @@ MonoBehaviour:
     - line: '|     PS5: UNITY_POST_PROCESSING_STACK_V2'
     - line: '|     QNX: UNITY_POST_PROCESSING_STACK_V2'
     - line: '|     ReservedCFE: UNITY_POST_PROCESSING_STACK_V2'
-    - line: '|     Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;UNITY_POST_PROCESSING_STACK_V2'
+    - line: '|     Standalone: UNITY_POST_PROCESSING_STACK_V2'
     - line: '|     VisionOS: UNITY_POST_PROCESSING_STACK_V2'
     - line: '|     WebGL: UNITY_POST_PROCESSING_STACK_V2'
     - line: '|     XboxOne: UNITY_POST_PROCESSING_STACK_V2'

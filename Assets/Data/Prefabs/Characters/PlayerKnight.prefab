@@ -3638,10 +3638,6 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterGroup: 0
   isPerformingAction: 0
-  isGrounded: 1
-  applyRootMotion: 0
-  canRotate: 1
-  canMove: 1
   respawnCharacter: 0
   switchRightWeapon: 0
   switchLeftWeapon: 0
@@ -3684,6 +3680,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  isActive:
+    m_InternalValue: 1
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkRotation:
@@ -3708,6 +3706,8 @@ MonoBehaviour:
   isLockedOn:
     m_InternalValue: 0
   isChargingAttack:
+    m_InternalValue: 0
+  isInvulnerable:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 0
@@ -3835,6 +3835,9 @@ MonoBehaviour:
   groundedYVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
+  canRotate: 1
+  canMove: 1
+  isGrounded: 1
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 1
@@ -3877,6 +3880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastDamageAnimationPlayed: 
+  applyRootMotion: 0
   hit_ForwardMedium01: hit_ForwardMedium01
   hit_ForwardMedium02: hit_ForwardMedium02
   hit_BackwardMedium01: hit_BackwardMedium01
@@ -3901,7 +3905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565b68ba182352b42b45cdddfabca19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRightHandWeapon: {fileID: 11400000, guid: fd0d04d1ca72a6940b910f1b625a6e55, type: 2}
+  currentRightHandWeapon: {fileID: 11400000, guid: 1cf57e67f272906448ecf56da8905be3, type: 2}
   currentLeftHandWeapon: {fileID: 11400000, guid: fd0d04d1ca72a6940b910f1b625a6e55, type: 2}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 1cf57e67f272906448ecf56da8905be3, type: 2}

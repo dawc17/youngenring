@@ -5,6 +5,8 @@ namespace DKC
 {
     public class AICharacterManager : CharacterManager
     {
+        [Header("Character Name")]
+        public string characterName = "";
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
@@ -13,7 +15,7 @@ namespace DKC
         public NavMeshAgent navMeshAgent;
 
         [Header("Current AI State")]
-        [SerializeField] AIState currentState;
+        [SerializeField] protected AIState currentState;
 
         [Header("AI States")]
         public IdleState idleState;
@@ -30,10 +32,28 @@ namespace DKC
             aiCharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
             aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
 
-            idleState = Instantiate(idleState);
-            pursueTargetState = Instantiate(pursueTargetState);
+        }
 
-            currentState = idleState; // Start with the idle state
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            if (IsOwner)
+            {
+                idleState = Instantiate(idleState);
+                pursueTargetState = Instantiate(pursueTargetState);
+
+                currentState = idleState; // Start with the idle state
+            }
+
+            aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHP;
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+
+            aiCharacterNetworkManager.currentHealth.OnValueChanged -= aiCharacterNetworkManager.CheckHP;
         }
 
         protected override void Update()

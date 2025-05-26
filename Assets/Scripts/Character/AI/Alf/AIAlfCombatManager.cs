@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DKC
@@ -6,11 +7,14 @@ namespace DKC
     {
         [Header("Damage Colliders")]
         [SerializeField] AlfClubDamageCollider clubDamageCollider;
+        [SerializeField] Transform durksStompingFoot;
+        [SerializeField] float durksStompRadius = 0.1f;
 
         [Header("Damage")]
         [SerializeField] int baseDamage = 25;
         [SerializeField] float attack01DamageModifier = 1.0f;
         [SerializeField] float attack02DamageModifier = 1.4f;
+        [SerializeField] float stompDamage = 25f;
 
         public void SetAttack01Damage()
         {
@@ -35,7 +39,39 @@ namespace DKC
 
         public void ActivateDurkStomp()
         {
+            Collider[] colliders = Physics.OverlapSphere(durksStompingFoot.position, durksStompRadius, WorldUtilityManager.instance.GetCharacterLayers());
 
+            foreach (var collider in colliders)
+            {
+                CharacterManager character = collider.GetComponent<CharacterManager>();
+
+                List<CharacterManager> charactersDamaged = new List<CharacterManager>();
+
+                if (character != null)
+                {
+                    if (charactersDamaged.Contains(character))
+                    {
+                        continue; // Skip if already damaged
+                    }
+
+                    charactersDamaged.Add(character); // Add to damaged list
+
+                    if (character.IsOwner)
+                    {
+                        TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Instance.takeDamageEffect);
+                        damageEffect.physicalDamage = stompDamage;
+                        damageEffect.poiseDamage = stompDamage;
+
+                        character.characterEffectsManager.ProcessInstantEffect(damageEffect);
+                    }
+                }
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(durksStompingFoot.position, durksStompRadius);
         }
 
         public override void PivotTowardsTarget(AICharacterManager aiCharacter)

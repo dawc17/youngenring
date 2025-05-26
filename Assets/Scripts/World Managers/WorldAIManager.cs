@@ -3,6 +3,7 @@ using Unity.Netcode;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DKC
 {
@@ -16,7 +17,10 @@ namespace DKC
 
         [Header("Characters")]
         [SerializeField] private List<AICharacterSpawner> aiCharacterSpawners;
-        [SerializeField] List<GameObject> spawnedCharacters;
+        [SerializeField] List<AICharacterManager> spawnedCharacters;
+
+        [Header("Boss Characters")]
+        [SerializeField] List<AIBossCharacterManager> spawnedBossCharacters;
 
         private void Awake()
         {
@@ -39,6 +43,29 @@ namespace DKC
                 spawner.AttemptToSpawnCharacter();
             }
 
+        }
+
+        public void AddCharacterToSpawnedCharactersList(AICharacterManager character)
+        {
+            if (spawnedCharacters.Contains(character))
+                return;
+
+            spawnedCharacters.Add(character);
+
+            AIBossCharacterManager bossCharacter = character as AIBossCharacterManager;
+
+            if (bossCharacter != null)
+            {
+                if (spawnedBossCharacters.Contains(bossCharacter))
+                    return;
+
+                spawnedBossCharacters.Add(bossCharacter);
+            }
+        }
+
+        public AIBossCharacterManager GetBossCharacterByID(int bossID)
+        {
+            return spawnedBossCharacters.FirstOrDefault(boss => boss.bossID == bossID);
         }
 
         private void DespawnAllCharacters()
