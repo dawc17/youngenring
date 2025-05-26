@@ -25,7 +25,7 @@ namespace DKC
         [SerializeField] protected bool hasRolledForComboChance = false;
 
         [Header("Engagement Distance")]
-        [SerializeField] protected float maximumEngagementDistance = 5; // the distance we have to be away from the target before we enter the pursue target state
+        [SerializeField] public float maximumEngagementDistance = 5; // the distance we have to be away from the target before we enter the pursue target state
 
         public override AIState Tick(AICharacterManager aiCharacter)
         {
@@ -41,6 +41,8 @@ namespace DKC
                     aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
             }
 
+            aiCharacter.aiCharacterCombatManager.RotateTowardsAgent(aiCharacter);
+
             if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
             {
                 return SwitchState(aiCharacter, aiCharacter.idleState);
@@ -52,9 +54,11 @@ namespace DKC
             }
             else
             {
-                // check recovery time of the attack
-                // pass attack to the attack state
+                aiCharacter.attackState.currentAttack = selectedAttack;
+
                 // roll for combo
+
+                return SwitchState(aiCharacter, aiCharacter.attackState);
             }
 
             // if out of engagement distance, switch to pursue target state
@@ -74,7 +78,7 @@ namespace DKC
         {
             potentialAttacks = new List<AICharacterAttackAction>();
 
-            foreach (var potentialAttack in potentialAttacks)
+            foreach (var potentialAttack in aiCharacterAttacks)
             {
                 // too close
                 if (potentialAttack.minimumAttackDistance > aiCharacter.aiCharacterCombatManager.distanceFromTarget)
@@ -115,6 +119,7 @@ namespace DKC
                     selectedAttack = attack;
                     previousAttack = selectedAttack; // store the previous attack for combo logic
                     hasAttack = true;
+                    return;
                 }
             }
             // 1. sort through all possible attacks

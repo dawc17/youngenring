@@ -1,91 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &402183527443183783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 998699062547891799}
-  - component: {fileID: 3433821629714788679}
-  - component: {fileID: 5818238947881939265}
-  m_Layer: 3
-  m_Name: Item_SwordSheath
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &998699062547891799
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402183527443183783}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.1645258, y: 0.069614984, z: 0.40507674, w: 0.89665926}
-  m_LocalPosition: {x: 8.2, y: -7.8, z: 28}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6140109163788170912}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3433821629714788679
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402183527443183783}
-  m_Mesh: {fileID: 4300014, guid: d288a0e4a2d923b46898986e979da643, type: 3}
---- !u!23 &5818238947881939265
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402183527443183783}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: ccae2dc6cf6f0c4479b782fedd0c8172, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &499365781451195075
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +118,6 @@ Transform:
   - {fileID: 3879591610204747759}
   - {fileID: 5026458205116708941}
   - {fileID: 6652540439281194581}
-  - {fileID: 998699062547891799}
   - {fileID: 4050395845748509105}
   - {fileID: 551118677865365205}
   - {fileID: 8605359849413356008}
@@ -3057,7 +2970,7 @@ GameObject:
   - component: {fileID: 1027377600892098516}
   - component: {fileID: 3669235139003343677}
   m_Layer: 3
-  m_Name: Cuck Dummy Loser
+  m_Name: Biter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3071,8 +2984,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7872978200527161011}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9446432, z: -0, w: 0.3280996}
-  m_LocalPosition: {x: 8.317115, y: 0.00000047683716, z: -7.9375362}
+  m_LocalRotation: {x: -0, y: -0.18490134, z: -0, w: 0.9827571}
+  m_LocalPosition: {x: 7.5571623, y: 0, z: -6.99471}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3085,7 +2998,7 @@ Transform:
   - {fileID: 3675784768643903212}
   - {fileID: 753648144927734773}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 141.693, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -21.311, z: 0}
 --- !u!95 &153578254666839346
 Animator:
   serializedVersion: 7
@@ -3318,6 +3231,8 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: 64926603be792aa4eb5afab6d1797caa, type: 2}
   idleState: {fileID: 11400000, guid: 64926603be792aa4eb5afab6d1797caa, type: 2}
   pursueTargetState: {fileID: 11400000, guid: a8625aa591c3db545a8776a963348585, type: 2}
+  combatState: {fileID: 11400000, guid: 0c47006ae0204334792440c1960728e5, type: 2}
+  attackState: {fileID: 11400000, guid: 1084c73177891df449b2ca77289a6011, type: 2}
 --- !u!114 &-7761703403080623251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3385,11 +3300,14 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 7708091327917222177}
+  actionRecoveryTimer: 0
+  distanceFromTarget: 0
   viewableAngle: 0
   directionOfTarget: {x: 0, y: 0, z: 0}
   detectionRadius: 15
   minimumDetectionAngle: -35
   maximumDetectionAngle: 35
+  attackRotationSpeed: 25
 --- !u!114 &-3865031327708632929
 MonoBehaviour:
   m_ObjectHideFlags: 0

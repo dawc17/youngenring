@@ -18,8 +18,8 @@ namespace DKC
         [Header("AI States")]
         public IdleState idleState;
         public PursueTargetState pursueTargetState;
-        // combat state
-        // attack state
+        public CombatState combatState;
+        public AttackState attackState;
 
         protected override void Awake()
         {
@@ -34,6 +34,13 @@ namespace DKC
             pursueTargetState = Instantiate(pursueTargetState);
 
             currentState = idleState; // Start with the idle state
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            aiCharacterCombatManager.HandleActionRecovery(this);
         }
 
         protected override void FixedUpdate()
