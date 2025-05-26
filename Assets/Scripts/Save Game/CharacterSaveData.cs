@@ -29,5 +29,15 @@ namespace DKC
         [Header("Stats")]
         public int vitality;
         public int endurance;
+
+        [Header("Bosses")]
+        public SerializableDictionary<int, bool> bossesAwakened;
+        public SerializableDictionary<int, bool> bossesDefeated;
+
+        public CharacterSaveData()
+        {
+            bossesAwakened = new SerializableDictionary<int, bool>();
+            bossesDefeated = new SerializableDictionary<int, bool>();
+        }
     }
 }

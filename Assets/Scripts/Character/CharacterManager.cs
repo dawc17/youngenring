@@ -50,7 +50,11 @@ namespace DKC
         {
             base.OnNetworkSpawn();
 
+            animator.SetBool("isMoving", characterNetworkManager.isMoving.Value);
+            characterNetworkManager.OnIsActiveChanged(false, characterNetworkManager.isActive.Value);
+
             characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
+            characterNetworkManager.isActive.OnValueChanged += characterNetworkManager.OnIsActiveChanged;
 
             if (!IsOwner)
             {
@@ -65,6 +69,7 @@ namespace DKC
         {
             base.OnNetworkDespawn();
             characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
+            characterNetworkManager.isActive.OnValueChanged -= characterNetworkManager.OnIsActiveChanged;
         }
 
         protected virtual void Update()

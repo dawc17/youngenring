@@ -8,6 +8,10 @@ namespace DKC
     {
         private CharacterManager character;
 
+        [Header("Active")]
+        public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone,
+            NetworkVariableWritePermission.Owner);
+
         [Header("Position")]
         public NetworkVariable<Vector3> networkPosition =
             new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone,
@@ -92,6 +96,11 @@ namespace DKC
         public void OnIsMovingChanged(bool oldValue, bool newValue)
         {
             character.animator.SetBool("isMoving", isMoving.Value);
+        }
+
+        public virtual void OnIsActiveChanged(bool oldValue, bool newValue)
+        {
+            gameObject.SetActive(isActive.Value);
         }
 
         [ServerRpc]

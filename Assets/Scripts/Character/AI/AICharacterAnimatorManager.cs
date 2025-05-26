@@ -22,7 +22,7 @@ namespace DKC
                 Vector3 velocity = aiCharacter.animator.deltaPosition;
 
                 aiCharacter.characterController.Move(velocity);
-                aiCharacter.transform.rotation = aiCharacter.animator.deltaRotation;
+                aiCharacter.transform.rotation *= aiCharacter.animator.deltaRotation;
             }
             else
             {
@@ -33,7 +33,7 @@ namespace DKC
 
                 aiCharacter.navMeshAgent.Move(velocity);
                 aiCharacter.transform.position = Vector3.SmoothDamp(transform.position, aiCharacter.characterNetworkManager.networkPosition.Value, ref aiCharacter.characterNetworkManager.networkPositionVelocity, aiCharacter.characterNetworkManager.networkPositionSmoothTime);
-                aiCharacter.navMeshAgent.transform.rotation = aiCharacter.animator.deltaRotation;
+                aiCharacter.transform.rotation *= aiCharacter.animator.deltaRotation;
             }
         }
     }

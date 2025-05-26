@@ -71,6 +71,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.15923567
+        functionName: EnableCanRotate
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.19631276
         functionName: OpenRightHandDamageCollider
         data: 
@@ -78,15 +85,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.33983517
-        functionName: CloseRightHandDamageCollider
+      - time: 0.22685322
+        functionName: DisableCanRotate
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.15923567
-        functionName: DisableCanRotate
+      - time: 0.33983517
+        functionName: CloseRightHandDamageCollider
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

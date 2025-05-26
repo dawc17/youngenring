@@ -143,7 +143,7 @@ namespace DKC
             bool canMove = false)
         {
             //Debug.Log($"Playing Target Action Animation: {targetAnimation}");
-            character.animator.applyRootMotion = applyRootMotion;
+            this.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
 
             // used to stop character from attempting new actions

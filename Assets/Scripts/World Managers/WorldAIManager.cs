@@ -15,7 +15,7 @@ namespace DKC
         [SerializeField] bool respawnCharacters = false;
 
         [Header("Characters")]
-        [SerializeField] GameObject[] aiCharacters;
+        [SerializeField] private List<AICharacterSpawner> aiCharacterSpawners;
         [SerializeField] List<GameObject> spawnedCharacters;
 
         private void Awake()
@@ -31,46 +31,14 @@ namespace DKC
             }
         }
 
-        private void Update()
-        {
-            if (respawnCharacters)
-            {
-                respawnCharacters = false;
-                SpawnAllCharacters();
-            }
-            if (despawnCharacters)
-            {
-                despawnCharacters = false;
-                DespawnAllCharacters();
-            }
-        }
-
-        private void Start()
+        public void SpawnCharacter(AICharacterSpawner spawner)
         {
             if (NetworkManager.Singleton.IsServer)
             {
-                StartCoroutine(WaitForSceneToLoadThenSpawnCharacters());
-            }
-        }
-
-        private IEnumerator WaitForSceneToLoadThenSpawnCharacters()
-        {
-            while (!SceneManager.GetActiveScene().isLoaded)
-            {
-                yield return null;
+                aiCharacterSpawners.Add(spawner);
+                spawner.AttemptToSpawnCharacter();
             }
 
-            SpawnAllCharacters();
-        }
-
-        private void SpawnAllCharacters()
-        {
-            foreach (var character in aiCharacters)
-            {
-                GameObject instantiatedCharacter = Instantiate(character);
-                instantiatedCharacter.GetComponent<NetworkObject>().Spawn();
-                spawnedCharacters.Add(instantiatedCharacter);
-            }
         }
 
         private void DespawnAllCharacters()
