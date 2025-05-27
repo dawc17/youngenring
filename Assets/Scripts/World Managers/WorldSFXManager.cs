@@ -40,7 +40,7 @@ namespace DKC
             {
                 bossLoopPlayer.clip = clip;
                 bossLoopPlayer.loop = true;
-                bossLoopPlayer.volume = 0.6f; // Set volume to a reasonable level
+                bossLoopPlayer.volume = 0.2f; // Set volume to a reasonable level
                 bossLoopPlayer.pitch = 1.0f; // Set pitch to normal
                 bossLoopPlayer.Play();
             }

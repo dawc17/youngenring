@@ -10,10 +10,7 @@ namespace DKC
         {
             base.Awake();
 
-            aiBossCharacter = GetComponent<AIBossCharacterManager>();
-
-            aiBossCharacter.aiCharacterNetworkManager.maxHealth.Value = 5000;
-            aiBossCharacter.aiCharacterNetworkManager.currentHealth.Value = aiBossCharacter.aiCharacterNetworkManager.maxHealth.Value;
+            aiBossCharacter = GetComponent<AIAlfCharacterManager>();
         }
     }
 }

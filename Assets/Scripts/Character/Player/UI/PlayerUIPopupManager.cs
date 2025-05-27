@@ -6,21 +6,41 @@ namespace DKC
 {
     public class PlayerUIPopupManager : MonoBehaviour
     {
-        [Header("YOU DIED Pop Up")] 
+        [Header("YOU DIED Pop Up")]
         [SerializeField] private GameObject youDiedPopUpGameObject;
         [SerializeField] private TextMeshProUGUI youDiedPopUpBackgroundText;
         [SerializeField] private TextMeshProUGUI youDiedPopUpText;
         [SerializeField] private CanvasGroup youDiedPopUpCanvasGroup; // allows the popup to fade over time
 
+        [Header("BOSS KILLED Pop Up")]
+        [SerializeField] private GameObject bossKilledPopUpGameObject;
+        [SerializeField] private TextMeshProUGUI bossKilledPopUpBackgroundText;
+        [SerializeField] private TextMeshProUGUI bossKilledPopUpText;
+        [SerializeField] private CanvasGroup bossKilledPopUpCanvasGroup; // allows the popup to fade over time
+
         public void SendYouDiedPopUp()
         {
             // actvate post processing effects
-            
+
             youDiedPopUpGameObject.SetActive(true);
             youDiedPopUpBackgroundText.characterSpacing = 0;
             StartCoroutine(StretchPopUpTextOverTime(youDiedPopUpBackgroundText, 8, 19f));
             StartCoroutine(FadeInPopUpOverTime(youDiedPopUpCanvasGroup, 5));
             StartCoroutine(WaitThenFadeOutPopUpOverTime(youDiedPopUpCanvasGroup, 2, 5));
+        }
+
+        public void SendBossKilledPopUp(string bossDefeatedMessage)
+        {
+            // actvate post processing effects
+
+            bossKilledPopUpText.text = bossDefeatedMessage;
+            bossKilledPopUpBackgroundText.text = bossDefeatedMessage;
+
+            bossKilledPopUpGameObject.SetActive(true);
+            bossKilledPopUpBackgroundText.characterSpacing = 0;
+            StartCoroutine(StretchPopUpTextOverTime(bossKilledPopUpBackgroundText, 8, 19f));
+            StartCoroutine(FadeInPopUpOverTime(bossKilledPopUpCanvasGroup, 5));
+            StartCoroutine(WaitThenFadeOutPopUpOverTime(bossKilledPopUpCanvasGroup, 2, 5));
         }
 
         private IEnumerator StretchPopUpTextOverTime(TextMeshProUGUI text, float duration, float spacingAmount)
@@ -69,7 +89,7 @@ namespace DKC
                     delay -= Time.deltaTime;
                     yield return null;
                 }
-                
+
                 canvas.alpha = 1;
                 float timer = 0;
                 yield return null;

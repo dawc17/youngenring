@@ -5129,6 +5129,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4475328573656161909, guid: 129335436ead25d2694a3a51450199cc, type: 3}
+      propertyPath: m_Volume
+      value: 0.129
+      objectReference: {fileID: 0}
     - target: {fileID: 3470447555458480825, guid: 129335436ead25d2694a3a51450199cc, type: 3}
       propertyPath: m_Name
       value: World SFX Manager

@@ -8,6 +8,8 @@ namespace DKC
         [Header("Fog")]
         [SerializeField] GameObject[] fogGameOjects;
 
+        [SerializeField] Collider fogWallCollider;
+
         [Header("ID")]
         public int fogWallID;
 
@@ -22,6 +24,7 @@ namespace DKC
             OnIsActiveChanged(false, isActive.Value);
             isActive.OnValueChanged += OnIsActiveChanged;
             WorldObjectManager.instance.AddFogWallToList(this);
+            fogWallCollider.enabled = false;
         }
 
         public override void OnNetworkDespawn()
@@ -39,6 +42,7 @@ namespace DKC
                 foreach (var fogObject in fogGameOjects)
                 {
                     fogObject.SetActive(true);
+                    fogWallCollider.enabled = true; // Enable the fog wall interactable
                 }
             }
             else
@@ -46,6 +50,7 @@ namespace DKC
                 foreach (var fogObject in fogGameOjects)
                 {
                     fogObject.SetActive(false);
+                    fogWallCollider.enabled = false; // Disable the fog wall interactable
                 }
             }
         }

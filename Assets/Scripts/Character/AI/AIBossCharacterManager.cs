@@ -120,6 +120,7 @@ namespace DKC
 
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
+            PlayerUIManager.instance.playerUIPopupManager.SendBossKilledPopUp("MASSIVE FOE FELLED");
             if (IsOwner)
             {
                 characterNetworkManager.currentHealth.Value = 0;
@@ -127,7 +128,10 @@ namespace DKC
 
                 bossFightIsActive.Value = false;
 
-                // reset any flags here that need to be reset
+                foreach (var fogWall in fogWalls)
+                {
+                    fogWall.isActive.Value = false; // Deactivate fog walls
+                }
 
                 // if we are not grounded, play an aerial death animation
 

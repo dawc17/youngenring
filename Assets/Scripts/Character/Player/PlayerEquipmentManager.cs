@@ -61,6 +61,9 @@ namespace DKC
             if (!player.IsOwner)
                 return;
 
+            if (player.isDead.Value)
+                return;
+
             player.playerAnimationManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false, false, true, true);
 
             WeaponItem selectedWeapon = null;
@@ -158,6 +161,9 @@ namespace DKC
         public void SwitchLeftWeapon()
         {
             if (!player.IsOwner)
+                return;
+
+            if (player.isDead.Value)
                 return;
 
             player.playerAnimationManager.PlayTargetActionAnimation("Swap_Left_Weapon_01", false, false, true, true);

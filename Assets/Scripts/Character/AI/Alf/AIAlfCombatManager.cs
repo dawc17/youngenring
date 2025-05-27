@@ -5,6 +5,7 @@ namespace DKC
 {
     public class AIAlfCombatManager : AICharacterCombatManager
     {
+        AIAlfCharacterManager aiBossCharacter;
         [Header("Damage Colliders")]
         [SerializeField] AlfClubDamageCollider clubDamageCollider;
         [SerializeField] Transform durksStompingFoot;
@@ -16,20 +17,31 @@ namespace DKC
         [SerializeField] float attack02DamageModifier = 1.4f;
         [SerializeField] float stompDamage = 25f;
 
+        [Header("VFX")]
+        public GameObject durkVFX;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            aiBossCharacter = GetComponent<AIAlfCharacterManager>();
+        }
+
         public void SetAttack01Damage()
         {
+            aiCharacter.characterSFXManager.PlayAttackGrunt();
             clubDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
         }
 
         public void SetAttack02Damage()
         {
+            aiCharacter.characterSFXManager.PlayAttackGrunt();
             clubDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
         }
 
         public void OpenClubDamageCollider()
         {
-            aiCharacter.characterSFXManager.PlayAttackGrunt();
             clubDamageCollider.EnableDamageCollider();
+            //aiBossCharacter.characterSFXManager.PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(aiBossCharacter.aiAlfSFXManager.clubWooshClips));
         }
 
         public void CloseClubDamageCollider()
@@ -39,6 +51,7 @@ namespace DKC
 
         public void ActivateDurkStomp()
         {
+            GameObject stompVFX = Instantiate(durkVFX, durksStompingFoot);
             Collider[] colliders = Physics.OverlapSphere(durksStompingFoot.position, durksStompRadius, WorldUtilityManager.instance.GetCharacterLayers());
 
             foreach (var collider in colliders)

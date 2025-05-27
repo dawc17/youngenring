@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4013104702
+  GlobalObjectIdHash: 2476906131
   InScenePlacedSourceGlobalObjectIdHash: 2476906131
   DeferredDespawnTick: 0
   Ownership: 1
@@ -76,6 +76,7 @@ MonoBehaviour:
   fogGameOjects:
   - {fileID: 2154573189293442004}
   - {fileID: 6566346509239536092}
+  fogWallCollider: {fileID: 3639260943055242171}
   fogWallID: 0
   isActive:
     m_InternalValue: 1

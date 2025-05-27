@@ -34,7 +34,7 @@ MonoBehaviour:
   chargedAttack01Modifier: 2
   chargedAttack02Modifier: 2.3
   baseStaminaCost: 20
-  lightAttackStaminaCostModifier: 0.9
+  lightAttackStaminaCostModifier: 0.5
   heavyAttackStaminaCostModifier: 1.2
   oh_rbAction: {fileID: 11400000, guid: 237cb2dfd4109d24da20c0900af2f3c8, type: 2}
   oh_rtAction: {fileID: 11400000, guid: 6e1b2768f2d290e4597ef252ae124692, type: 2}

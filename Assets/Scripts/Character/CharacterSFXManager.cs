@@ -5,7 +5,7 @@ namespace DKC
 {
     public class CharacterSFXManager : MonoBehaviour
     {
-        private AudioSource audioSource;
+        public AudioSource audioSource;
 
         [Header("Damage Grunts")]
         [SerializeField] protected AudioClip[] damageGrunts;
@@ -16,7 +16,10 @@ namespace DKC
         [Header("Roll SFX")]
         [SerializeField] protected AudioClip[] rollSounds;
 
-        protected void Awake()
+        [Header("Footstep Sounds")]
+        [SerializeField] protected AudioClip[] footstepSounds;
+
+        protected virtual void Awake()
         {
             audioSource = GetComponent<AudioSource>();
         }
@@ -40,13 +43,23 @@ namespace DKC
 
         public virtual void PlayAttackGrunt()
         {
-            PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(attackGrunts));
+            if (attackGrunts.Length > 0)
+                PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(attackGrunts));
         }
 
         public virtual void PlayRollSFX()
         {
-            Debug.Log("Playing roll sound");
-            PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(rollSounds));
+            if (rollSounds.Length > 0)
+            {
+                Debug.Log("Playing roll sound");
+                PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(rollSounds));
+            }
+        }
+
+        public virtual void PlayFootstepSFX()
+        {
+            if (footstepSounds.Length > 0)
+                PlaySFX(WorldSFXManager.instance.ChooseRandomSFXFromArray(footstepSounds));
         }
     }
 }
