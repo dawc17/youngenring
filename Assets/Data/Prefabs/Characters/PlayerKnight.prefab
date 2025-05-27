@@ -3947,6 +3947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899e35402b981f114b7ca37f63fdd9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   damageGrunts:
   - {fileID: 8300000, guid: 0c6cf71a12249944a874ffc8cdcf9923, type: 3}
   - {fileID: 8300000, guid: 8db3abec2534a964ebbdf0a34ba6e727, type: 3}
@@ -3963,6 +3964,8 @@ MonoBehaviour:
   rollSounds:
   - {fileID: 8300000, guid: 8df7d23a665dd9f49803b48959f50342, type: 3}
   - {fileID: 8300000, guid: 93ea6d2c984a566479e949c24800a299, type: 3}
+  footstepSounds: []
+  deathSound: {fileID: 8300000, guid: a35775fec6c566249b254e42ea46f181, type: 3}
 --- !u!54 &6194903210592550615
 Rigidbody:
   m_ObjectHideFlags: 0

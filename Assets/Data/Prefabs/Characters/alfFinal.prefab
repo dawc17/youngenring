@@ -2085,15 +2085,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebc1eb3d84793a4b8c1fc447820640c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   damageGrunts:
-  - {fileID: 8300000, guid: 43924ce171c7da94c8fe9206fe5c967d, type: 3}
-  - {fileID: 8300000, guid: fa4826f75a7386e4ab0a0f4d51054c81, type: 3}
-  - {fileID: 8300000, guid: 8dde39c5830a7874aa92729b674923eb, type: 3}
+  - {fileID: 8300000, guid: 8aba5cdefb578e645bfca59fad999014, type: 3}
+  - {fileID: 8300000, guid: ecaa897652068d84d88b63f05f329248, type: 3}
+  - {fileID: 8300000, guid: b9c1116599ef33c419c1327bb44ed5ea, type: 3}
   attackGrunts:
-  - {fileID: 8300000, guid: 73ec236986c48c84dbec534c6e22d07b, type: 3}
-  - {fileID: 8300000, guid: e785d89ef56fc4f49af9d0910a1b6973, type: 3}
-  - {fileID: 8300000, guid: 1f596aea712627447bd93b789d6e25f5, type: 3}
-  - {fileID: 8300000, guid: c97c6a02548fd5e4ba7b335575162e5f, type: 3}
+  - {fileID: 8300000, guid: 57a80b7565941cb40aae54229f93bdba, type: 3}
+  - {fileID: 8300000, guid: 5732fcf5a91059e448409c50d383f589, type: 3}
+  - {fileID: 8300000, guid: 58340f562f1d9284fb32ba8e69b6fdba, type: 3}
+  - {fileID: 8300000, guid: 48071c8e3616fd545b808718a0c6f514, type: 3}
   rollSounds: []
   footstepSounds: []
   clubWooshClips:
@@ -2111,6 +2112,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c1f8c36ebdb20024ea8a59ec457d582c, type: 3}
   - {fileID: 8300000, guid: af2c78ece9c3f6a4b83fc3562a867d9c, type: 3}
   - {fileID: 8300000, guid: 6e158e2d37d77a048838813185c20707, type: 3}
+  introQuip: {fileID: 8300000, guid: f824d5df2b88e6e448e48cff63542bad, type: 3}
 --- !u!114 &2994304196508298756
 MonoBehaviour:
   m_ObjectHideFlags: 0
